@@ -1,0 +1,29 @@
+.ProductsHeader {
+  width: 100%;
+  background-color: palegoldenrod;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+
+    li {
+      margin: 0 1rem;
+    }
+  }
+}
+
+.ProductsHeader__item {
+  color: #0e4f1f;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover,
+  &:active {
+    color: white;
+    border-bottom: 5px solid white;
+  }
+}
