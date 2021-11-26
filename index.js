@@ -44,8 +44,8 @@ app.use("/api/transactions", transactionsRoutes);
 app.use("/api/auth", authRoutes);
 
 // app start configuration
-const port = 8080;
+const PORT = process.env.PORT || 8080;
 
-app.listen(port, function () {
-  console.log("Running fake store backend on port " + port);
+app.listen(PORT, function () {
+  console.log("Running fake store backend on port " + PORT);
 });
