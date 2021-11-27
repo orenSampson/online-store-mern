@@ -10,7 +10,8 @@ export const requestsendTransaction = async (payload, token) => {
     };
 
     await axios.post(
-      "http://localhost:8080/api/transactions/addtransaction",
+      "/api/transactions/addtransaction",
+      // "http://localhost:8080/api/transactions/addtransaction",
       payload,
       {
         headers,
@@ -25,7 +26,8 @@ export const requestGetDiscounts = async (payload) => {
   let fetchedData;
   try {
     fetchedData = await axios.get(
-      "http://localhost:8080/api/transactions/getdiscounts"
+      "/api/transactions/getdiscounts"
+      // "http://localhost:8080/api/transactions/getdiscounts"
     );
     if (!fetchedData) {
       throw new Error(API_CALL_FAILED);

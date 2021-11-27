@@ -11,7 +11,8 @@ export const requestGetTransactions = async (token) => {
     };
 
     fetchedData = await axios.get(
-      "http://localhost:8080/api/transactions/transactionshistory",
+      "/api/transactions/transactionshistory",
+      // "http://localhost:8080/api/transactions/transactionshistory",
       {
         headers,
       }

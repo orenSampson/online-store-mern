@@ -12,7 +12,8 @@ export const requestGetProducts = async (payload) => {
       },
     };
     fetchedData = await axios.get(
-      "http://localhost:8080/api/products/getproducts",
+      "/api/products/getproducts",
+      // "http://localhost:8080/api/products/getproducts",
       config
     );
 

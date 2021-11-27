@@ -6,12 +6,14 @@ export const requestAuth = async (payload) => {
   let response;
   try {
     if (!payload.isLoginMode) {
-      response = await axios.put("http://localhost:8080/api/auth/signup", {
+      response = await axios.put("/api/auth/signup", {
+        // response = await axios.put("http://localhost:8080/api/auth/signup", {
         email: payload.email,
         password: payload.password,
       });
     } else {
-      response = await axios.post("http://localhost:8080/api/auth/login", {
+      response = await axios.post("/api/auth/login", {
+        // response = await axios.post("http://localhost:8080/api/auth/login", {
         email: payload.email,
         password: payload.password,
       });

@@ -6,7 +6,8 @@ export const requestGetCategories = async () => {
   let fetchedData;
   try {
     fetchedData = await axios.get(
-      "http://localhost:8080/api/categories/getcategories"
+      "/api/categories/getcategories"
+      // "http://localhost:8080/api/categories/getcategories"
     );
 
     if (!fetchedData) {

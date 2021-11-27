@@ -19,8 +19,11 @@ app.use(express.json());
 
 app.use(cookieParser());
 
+// mongodb+srv://new-user:turivdcr10@cluster0.ehoac.mongodb.net/onlineShopMern?retryWrites=true&w=majority
+
 // database configuration
-const MONGODB_URI = "mongodb://localhost:27017/fakeStore";
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/fakeStore";
 
 const options = {
   useNewUrlParser: true,
@@ -42,6 +45,10 @@ app.use("/api/products", productsRoutes);
 app.use("/api/categories", categoriesRoutes);
 app.use("/api/transactions", transactionsRoutes);
 app.use("/api/auth", authRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // app start configuration
 const PORT = process.env.PORT || 8080;
