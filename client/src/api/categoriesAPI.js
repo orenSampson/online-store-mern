@@ -5,10 +5,7 @@ import { API_CALL_FAILED } from "../store/constants/messages";
 export const requestGetCategories = async () => {
   let fetchedData;
   try {
-    fetchedData = await axios.get(
-      "/api/categories/getcategories"
-      // "http://localhost:8080/api/categories/getcategories"
-    );
+    fetchedData = await axios.get("/api/categories/getcategories");
 
     if (!fetchedData) {
       throw new Error(API_CALL_FAILED);

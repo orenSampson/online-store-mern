@@ -11,11 +11,7 @@ export const requestGetProducts = async (payload) => {
         page: payload.page,
       },
     };
-    fetchedData = await axios.get(
-      "/api/products/getproducts",
-      // "http://localhost:8080/api/products/getproducts",
-      config
-    );
+    fetchedData = await axios.get("/api/products/getproducts", config);
 
     if (!fetchedData) {
       throw new Error(API_CALL_FAILED);

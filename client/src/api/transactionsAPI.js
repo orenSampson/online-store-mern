@@ -10,13 +10,9 @@ export const requestGetTransactions = async (token) => {
       [AUTH_HEADER_NAME]: `Bearer ${token}`,
     };
 
-    fetchedData = await axios.get(
-      "/api/transactions/transactionshistory",
-      // "http://localhost:8080/api/transactions/transactionshistory",
-      {
-        headers,
-      }
-    );
+    fetchedData = await axios.get("/api/transactions/transactionshistory", {
+      headers,
+    });
 
     if (!fetchedData) {
       throw new Error(API_CALL_FAILED);

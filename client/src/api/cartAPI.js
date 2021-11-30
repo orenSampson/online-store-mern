@@ -9,14 +9,9 @@ export const requestsendTransaction = async (payload, token) => {
       [AUTH_HEADER_NAME]: `Bearer ${token}`,
     };
 
-    await axios.post(
-      "/api/transactions/addtransaction",
-      // "http://localhost:8080/api/transactions/addtransaction",
-      payload,
-      {
-        headers,
-      }
-    );
+    await axios.post("/api/transactions/addtransaction", payload, {
+      headers,
+    });
   } catch (error) {
     throw new Error(error.response?.data?.message || API_CALL_FAILED);
   }
@@ -25,10 +20,7 @@ export const requestsendTransaction = async (payload, token) => {
 export const requestGetDiscounts = async (payload) => {
   let fetchedData;
   try {
-    fetchedData = await axios.get(
-      "/api/transactions/getdiscounts"
-      // "http://localhost:8080/api/transactions/getdiscounts"
-    );
+    fetchedData = await axios.get("/api/transactions/getdiscounts");
     if (!fetchedData) {
       throw new Error(API_CALL_FAILED);
     }
