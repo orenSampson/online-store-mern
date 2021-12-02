@@ -1,5 +1,7 @@
-import { Fragment } from "react";
+// import { Fragment } from "react";
 import { useDispatch } from "react-redux";
+
+import styles from "./Pagination.module.scss";
 
 const backButtonName = "< Back";
 const nextButtonName = "Next >";
@@ -35,12 +37,14 @@ function Pagination(props) {
   const Content = !!(props.completeArray?.length !== 0) && (
     <div>
       {BackButton}
-      <span>{`${props.currentPage} of ${props.totalPages}`}</span>
+      <span
+        className={styles["pageNumber"]}
+      >{`${props.currentPage} of ${props.totalPages}`}</span>
       {ForwardButton}
     </div>
   );
 
-  return <Fragment>{Content}</Fragment>;
+  return <div className={styles["Pagination"]}>{Content}</div>;
 }
 
 export default Pagination;
