@@ -6,7 +6,6 @@ export const new_state_pagination = (payload) => {
     payload: {
       currentPage: payload.page,
       totalPages: payload.totalPages,
-      isLastPage: !(payload.page < payload.totalPages),
     },
   };
 };

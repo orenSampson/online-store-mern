@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import Products from "../Products/Products";
-import Pagination from "../../Pagination/Pagination";
+import PaginationComponent from "../../PaginationComponent/PaginationComponent";
 import ProductsHeader from "../ProductsHeader/ProductsHeader";
 import { get_products } from "../../../store/products/actions";
 import styles from "./ProductsManager.module.scss";
@@ -14,10 +15,6 @@ function ProductsManager() {
     (state) => state.paginationReducers.currentPage
   );
 
-  const isLastPage = useSelector(
-    (state) => state.paginationReducers.isLastPage
-  );
-
   const totalPages = useSelector(
     (state) => state.paginationReducers.totalPages
   );
@@ -26,19 +23,26 @@ function ProductsManager() {
 
   const products = useSelector((state) => state.productsReducers.products);
 
-  return (
-    <div className={styles["ProductsManager"]}>
-      <ProductsHeader />
+  const Content = isLoading ? (
+    <div className={styles["ClipLoader"]}>
       <ClipLoader loading={isLoading} size={150} />
+    </div>
+  ) : (
+    <Fragment>
       <Products products={products} showAddToCartBtn={true} isCart={false} />
-      <Pagination
-        completeArray={products}
+      <PaginationComponent
         currentPage={currentPage}
-        isLastPage={isLastPage}
         totalPages={totalPages}
         category={category}
         get_products={get_products}
       />
+    </Fragment>
+  );
+
+  return (
+    <div className={styles["ProductsManager"]}>
+      <ProductsHeader />
+      {Content}
     </div>
   );
 }
