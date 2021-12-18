@@ -12,10 +12,10 @@ import CardActionArea from "@mui/material/CardActionArea";
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
 import PriceFormater from "../../general/PriceFormater/PriceFormatter";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Backdrop from "@mui/material/Backdrop";
 
 import * as cartActions from "../../../store/cart/actions";
 import ProductModal from "../ProductModal/ProductModal";
+import Backdrop from "../../Layout/Backdrop/Backdrop";
 
 const charCount = 35;
 
@@ -53,24 +53,20 @@ const Product = (props) => {
   return (
     <div>
       <div>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={isProductModalOpen}
-        >
-          <OutsideClickHandler onOutsideClick={closeProductModalHandler}>
-            <ProductModal
-              title={props.title}
-              description={props.description}
-              category={props.category}
-              price={props.price}
-              amount={props.amount}
-              image={props.image}
-              showAddToCartBtn={props.showAddToCartBtn}
-              isCart={props.isCart}
-              show={isProductModalOpen}
-            />
-          </OutsideClickHandler>
-        </Backdrop>
+        <Backdrop showBackDrop={isProductModalOpen} />
+        <OutsideClickHandler onOutsideClick={closeProductModalHandler}>
+          <ProductModal
+            title={props.title}
+            description={props.description}
+            category={props.category}
+            price={props.price}
+            amount={props.amount}
+            image={props.image}
+            showAddToCartBtn={props.showAddToCartBtn}
+            isCart={props.isCart}
+            show={isProductModalOpen}
+          />
+        </OutsideClickHandler>
       </div>
       <Card
         sx={{
