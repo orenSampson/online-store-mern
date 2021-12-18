@@ -2,9 +2,9 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
+import Backdrop from "@mui/material/Backdrop";
 
 import SideBar from "../SideBar/SideBar";
-import Backdrop from "../Backdrop/Backdrop";
 import MainNav from "../MainNav/MainNav";
 import * as generalActions from "../../../store/general/actions";
 import { GENERAL_INITIAL_STATE } from "../../../store/general/reducers";
@@ -69,10 +69,14 @@ const Header = () => {
       </header>
 
       <Fragment>
-        <Backdrop showBackDrop={showBackDrop} />
-        <OutsideClickHandler onOutsideClick={closeShowSideBarHandler}>
-          <SideBar />
-        </OutsideClickHandler>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={showBackDrop}
+        >
+          <OutsideClickHandler onOutsideClick={closeShowSideBarHandler}>
+            <SideBar />
+          </OutsideClickHandler>
+        </Backdrop>
       </Fragment>
     </Fragment>
   );
