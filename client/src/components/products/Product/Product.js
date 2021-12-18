@@ -1,104 +1,150 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import OutsideClickHandler from "react-outside-click-handler";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import OutsideClickHandler from "react-outside-click-handler";
 
-import * as cartActions from "../../../store/cart/actions";
-import Backdrop from "../../Layout/Backdrop/Backdrop";
-import ProductModal from "../ProductModal/ProductModal";
-import PriceFormater from "../../general/PriceFormater/PriceFormatter";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
+// import CardActionArea from "@mui/material/CardActionArea";
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
-import styles from "./Product.module.scss";
+import PriceFormater from "../../general/PriceFormater/PriceFormatter";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const charCount = 50;
+// import * as cartActions from "../../../store/cart/actions";
+// import Backdrop from "../../Layout/Backdrop/Backdrop";
+// import ProductModal from "../ProductModal/ProductModal";
+// import styles from "./Product.module.scss";
 
-const Product = ({
-  id,
-  title,
-  description,
-  category,
-  price,
-  amount,
-  image,
-  showAddToCartBtn,
-  isCart,
-}) => {
-  const dispatch = useDispatch();
+const charCount = 35;
 
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+const Product = (props) => {
+  // const dispatch = useDispatch();
 
-  const addTocartHandler = () => {
-    dispatch(
-      cartActions.cart_add_remove_product({
-        id,
-        title,
-        description,
-        category,
-        price,
-        amount: 1,
-        image,
-      })
-    );
-  };
+  // const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+
+  // const addTocartHandler = () => {
+  //   dispatch(
+  //     cartActions.cart_add_remove_product({
+  //       id,
+  //       title,
+  //       description,
+  //       category,
+  //       price,
+  //       amount: 1,
+  //       image,
+  //     })
+  //   );
+  // };
 
   const shortTitle =
-    title.slice(0, charCount) + (title.length > charCount ? "..." : "");
+    props.title.slice(0, charCount) +
+    (props.title.length > charCount ? "..." : "");
 
-  const openProductModalHandler = () => {
-    setIsProductModalOpen(true);
-  };
+  // const openProductModalHandler = () => {
+  //   setIsProductModalOpen(true);
+  // };
 
-  const closeProductModalHandler = () => {
-    setIsProductModalOpen(false);
-  };
+  // const closeProductModalHandler = () => {
+  //   setIsProductModalOpen(false);
+  // };
 
   return (
-    <div className={styles["Product"]}>
-      <div
-        className={styles["ProductWrapper"]}
-        onClick={openProductModalHandler}
-      >
-        <div>
-          <Backdrop showBackDrop={isProductModalOpen} />
-          <OutsideClickHandler onOutsideClick={closeProductModalHandler}>
-            <ProductModal
-              title={title}
-              description={description}
-              category={category}
-              price={price}
-              amount={amount}
-              image={image}
-              showAddToCartBtn={showAddToCartBtn}
-              isCart={isCart}
-              show={isProductModalOpen}
-            />
-          </OutsideClickHandler>
-        </div>
-        <div>
-          <img
-            className={styles["Product-picture"]}
-            src={image}
-            alt="product"
+    <Card
+      sx={{
+        width: "16rem",
+        height: "28rem",
+        marginBottom: "0.5rem",
+        marginX: "0.2rem",
+      }}
+      elevation={1}
+    >
+      <CardMedia
+        sx={{ height: "10rem" }}
+        component="img"
+        image={props.image}
+        alt="image"
+      />
+      <CardContent>
+        <Typography sx={{ height: "4rem" }} gutterBottom variant="h6">
+          {shortTitle}
+        </Typography>
+        <Typography sx={{ height: "2rem" }} gutterBottom variant="body1" noWrap>
+          {props.category}
+        </Typography>
+        <Typography sx={{ height: "2.5rem" }} gutterBottom variant="h6">
+          <ShowAmount
+            amount={props.amount}
+            showAddToCartBtn={props.showAddToCartBtn}
+            isCart={props.isCart}
           />
-          <div className={styles["Product-details"]}>
-            <p className={styles["Product-details__title"]}>{shortTitle}</p>
-            <p>{category}</p>
-            <p>
-              <ShowAmount
-                amount={amount}
-                showAddToCartBtn={showAddToCartBtn}
-                isCart={isCart}
-              />
-            </p>
-            <PriceFormater price={price} />
-          </div>
-        </div>
-      </div>
-      {showAddToCartBtn ? (
-        <button className={styles["Product-button"]} onClick={addTocartHandler}>
-          Add to cart
-        </button>
-      ) : null}
-    </div>
+        </Typography>
+        <Typography variant="h6">
+          <PriceFormater price={props.price} />
+        </Typography>
+      </CardContent>
+
+      <CardActions sx={{ justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          disableElevation
+          endIcon={<AddShoppingCartIcon />}
+        >
+          add to cart
+        </Button>
+      </CardActions>
+    </Card>
+    // <div className={styles["Product"]}>
+    //   <div
+    //     className={styles["ProductWrapper"]}
+    //     onClick={openProductModalHandler}
+    //   >
+    //     <div>
+    //       <Backdrop showBackDrop={isProductModalOpen} />
+    //       <OutsideClickHandler onOutsideClick={closeProductModalHandler}>
+    //         <ProductModal
+    //           title={title}
+    //           description={description}
+    //           category={category}
+    //           price={price}
+    //           amount={amount}
+    //           image={image}
+    //           showAddToCartBtn={showAddToCartBtn}
+    //           isCart={isCart}
+    //           show={isProductModalOpen}
+    //         />
+    //       </OutsideClickHandler>
+    //     </div>
+    //     <div>
+    //       <img
+    //         className={styles["Product-picture"]}
+    //         src={image}
+    //         alt="product"
+    //       />
+    //       <div className={styles["Product-details"]}>
+    //         <p className={styles["Product-details__title"]}>{shortTitle}</p>
+    //         <p>{category}</p>
+    //         <p>
+    //           <ShowAmount
+    //             amount={amount}
+    //             showAddToCartBtn={showAddToCartBtn}
+    //             isCart={isCart}
+    //           />
+    //         </p>
+    //         <PriceFormater price={price} />
+    //       </div>
+    //     </div>
+    //   </div>
+    //   {showAddToCartBtn ? (
+    //     <button className={styles["Product-button"]} onClick={addTocartHandler}>
+    //       Add to cart
+    //     </button>
+    //   ) : null}
+    // </div>
   );
 };
 

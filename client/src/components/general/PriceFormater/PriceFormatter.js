@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import styles from "./PriceFormatter.module.scss";
 const PriceFormatter = (props) => {
   const dollarUSLocale = Intl.NumberFormat("en-US");
 
@@ -11,12 +10,13 @@ const PriceFormatter = (props) => {
   };
 
   return (
-    <span className={styles["price"]}>
+    <Fragment>
+      {"$"}
       {priceObj.whole}
       <small>
         <sup>{priceObj.remainder}</sup>
       </small>
-    </span>
+    </Fragment>
   );
 };
 
