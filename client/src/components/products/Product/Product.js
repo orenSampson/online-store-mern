@@ -71,7 +71,6 @@ const Product = (props) => {
       <Card
         sx={{
           width: "16rem",
-          height: "28rem",
           marginBottom: "0.5rem",
           marginX: "0.2rem",
         }}
