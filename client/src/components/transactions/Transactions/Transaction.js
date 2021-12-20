@@ -1,7 +1,7 @@
 import React from "react";
 
 import Products from "../../products/Products/Products";
-import PriceFormatter from "../../general/PriceFormater/PriceFormatter";
+import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import styles from "./Transaction.module.scss";
 
 const Transaction = (props) => {

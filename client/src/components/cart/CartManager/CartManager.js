@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as cartActions from "../../../store/cart/actions";
 import Products from "../../products/Products/Products";
-import PriceFormatter from "../../general/PriceFormater/PriceFormatter";
+import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import * as messages from "../../../store/constants/messages";
 import styles from "./CartManager.module.scss";
 

@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import CardActionArea from "@mui/material/CardActionArea";
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
-import PriceFormater from "../../general/PriceFormater/PriceFormatter";
+import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import * as cartActions from "../../../store/cart/actions";
@@ -103,7 +103,7 @@ const Product = (props) => {
               />
             </Typography>
             <Typography variant="h6">
-              <PriceFormater price={props.price} />
+              <PriceFormatter price={props.price} />
             </Typography>
           </CardContent>
         </CardActionArea>
