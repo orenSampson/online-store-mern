@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,13 +8,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import CardActionArea from "@mui/material/CardActionArea";
+
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
 import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
 import * as cartActions from "../../../store/cart/actions";
 import ProductModal from "../ProductModal/ProductModal";
 import Backdrop from "../../Layout/Backdrop/Backdrop";
+import styles from "./Product.module.scss";
 
 const charCount = 35;
 
@@ -68,34 +68,35 @@ const Product = (props) => {
           />
         </OutsideClickHandler>
       </div>
-      <Card
-        sx={{
-          width: "16rem",
-          marginBottom: "0.5rem",
-          marginX: "0.2rem",
-        }}
-        elevation={1}
-      >
+      <Card className={styles["Product"]} elevation={1}>
         <CardActionArea onClick={openProductModalHandler}>
           <CardMedia
-            sx={{ height: "10rem" }}
+            className={styles["Product-picture"]}
             component="img"
             image={props.image}
             alt="image"
           />
           <CardContent>
-            <Typography sx={{ height: "4.5rem" }} gutterBottom variant="h6">
+            <Typography
+              className={styles["Product-title"]}
+              gutterBottom
+              variant="h6"
+            >
               {shortTitle}
             </Typography>
             <Typography
-              sx={{ height: "2rem" }}
+              className={styles["Product-category"]}
               gutterBottom
               variant="body1"
               noWrap
             >
               {props.category}
             </Typography>
-            <Typography sx={{ height: "2.5rem" }} gutterBottom variant="h6">
+            <Typography
+              className={styles["Product-amount"]}
+              gutterBottom
+              variant="h6"
+            >
               <ShowAmount
                 amount={props.amount}
                 showAddToCartBtn={props.showAddToCartBtn}
@@ -108,7 +109,7 @@ const Product = (props) => {
           </CardContent>
         </CardActionArea>
         {props.showAddToCartBtn ? (
-          <CardActions sx={{ justifyContent: "center" }}>
+          <CardActions className={styles["Product-CardActions"]}>
             <Button
               variant="contained"
               size="large"

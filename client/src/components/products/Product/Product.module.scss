@@ -1,39 +1,24 @@
 .Product {
-  background: #e85d04;
-  width: 10rem;
-  height: 30rem;
-  margin: 1%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-weight: bold;
-
-  &:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  }
-}
-
-.ProductWrapper {
-  height: inherit;
+  width: 16rem;
+  margin: 0 0.2rem 0.5rem 0.2rem;
 }
 
 .Product-picture {
-  width: 100%;
   height: 10rem;
 }
 
-.Product-details {
-  padding: 0 0.3rem;
-  display: flex;
-  flex-direction: column;
+.Product-title {
+  height: 4.5rem;
 }
 
-.Product-button {
-  color: white;
-  background: darkcyan;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: bold;
+.Product-category {
+  height: 2rem;
+}
+
+.Product-amount {
+  height: 2.5rem;
+}
+
+.Product-CardActions {
+  justify-content: center;
 }
