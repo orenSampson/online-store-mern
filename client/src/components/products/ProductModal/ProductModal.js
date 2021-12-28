@@ -9,23 +9,15 @@ import ShowAmount from "../../general/ShowAmount/ShowAmount";
 import styles from "./ProductModal.module.scss";
 
 const ProductModal = (props) => {
-  const cssClasses = props.show
-    ? styles["ProductModalOpen"]
-    : styles["ProductModalClosed"];
+  const cssClasses = [
+    styles["ProductModal"],
+    props.show ? styles["ProductModalOpen"] : styles["ProductModalClosed"],
+  ];
 
   return (
-    <Card
-      sx={{
-        position: "fixed",
-        zIndex: "200",
-        top: "30%",
-        left: "25%",
-        width: "50%",
-      }}
-      className={cssClasses}
-    >
+    <Card className={cssClasses.join(" ")}>
       <CardMedia
-        sx={{ height: "14rem" }}
+        className={styles["ProductModal-CardMedia"]}
         component="img"
         image={props.image}
         alt="image"

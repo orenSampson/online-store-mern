@@ -1,3 +1,15 @@
+.ProductModal {
+  position: fixed;
+  z-index: 200;
+  top: 20%;
+  left: 25%;
+  width: 50%;
+}
+
+.ProductModal-CardMedia {
+  height: 14rem;
+}
+
 .ProductModalOpen {
   display: block;
 }
