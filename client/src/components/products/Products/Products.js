@@ -4,7 +4,6 @@ import Product from "../Product/Product";
 const Products = (props) => {
   const RenderProducts = props.products?.map((product) => (
     <Product
-      className={styles["Product"]}
       id={product.id}
       title={product.title}
       description={product.description}
