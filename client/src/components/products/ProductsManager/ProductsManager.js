@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import ClipLoader from "react-spinners/ClipLoader";
 
 import Products from "../Products/Products";
 import PaginationComponent from "../../PaginationComponent/PaginationComponent";
 import ProductsHeader from "../ProductsHeader/ProductsHeader";
+import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
 import { get_products } from "../../../store/products/actions";
 import styles from "./ProductsManager.module.scss";
 
@@ -25,7 +25,7 @@ function ProductsManager() {
 
   const Content = isLoading ? (
     <div className={styles["ClipLoader"]}>
-      <ClipLoader loading={isLoading} size={150} />
+      <ClipLoaderComponent isLoading={isLoading} />
     </div>
   ) : (
     <Fragment>

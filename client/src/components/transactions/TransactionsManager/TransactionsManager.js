@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ClipLoader from "react-spinners/ClipLoader";
 
 import Transaction from "../Transactions/Transaction";
+import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
 import * as transactionsActions from "../../../store/transactions/actions";
 
 function TransactionsManager() {
@@ -41,7 +41,7 @@ function TransactionsManager() {
   return (
     <div>
       <div>{transactionsComponents}</div>;
-      <ClipLoader loading={isLoading} size={150} />
+      <ClipLoaderComponent isLoading={isLoading} />
     </div>
   );
 }
