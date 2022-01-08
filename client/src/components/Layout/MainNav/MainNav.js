@@ -9,7 +9,7 @@ function MainNav() {
       <ul>
         <li>
           <NavLink className={styles["main-nav__item"]} to="/auth">
-            Sigup\Login
+            Signup\Login
           </NavLink>
         </li>
         <li>

@@ -1,0 +1,17 @@
+.AuthForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PasswordField {
+  margin-bottom: 1rem;
+}
+
+.SubmitButton {
+  margin-bottom: 1rem;
+}
+
+.mandatory {
+  color: red;
+}
