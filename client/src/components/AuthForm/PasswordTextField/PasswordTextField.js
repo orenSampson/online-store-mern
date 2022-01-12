@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { TextField } from "@mui/material";
 
 import * as messages from "../../../constants/messages";
@@ -9,6 +9,12 @@ let passwordTimeoutID = null;
 
 const PasswordTextField = (props) => {
   const passwordInputRef = useRef();
+
+  useEffect(() => {
+    return () => {
+      clearTimeoutAndPasswordError();
+    };
+  });
 
   const passwordValidator = () => {
     if (passwordInputRef.current.value.length === 0) {

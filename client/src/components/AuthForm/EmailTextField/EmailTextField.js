@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { TextField } from "@mui/material";
 import validator from "validator";
 
@@ -9,6 +9,12 @@ let emailTimeoutID;
 
 const EmailTextField = (props) => {
   const emailInputRef = useRef();
+
+  useEffect(() => {
+    return () => {
+      clearTimeoutAndEmailError();
+    };
+  });
 
   const emailValidator = () => {
     if (emailInputRef.current.value === "") {
