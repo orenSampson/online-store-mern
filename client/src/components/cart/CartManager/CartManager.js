@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Typography } from "@mui/material";
 
 import * as cartActions from "../../../store/cart/actions";
 import Products from "../../products/Products/Products";
@@ -28,29 +29,29 @@ function CartManager() {
 
   const discountAppliedRelatedElements = (
     <Fragment>
-      <h3>Discount Apllied!!</h3>
-      <h3>
+      <Typography variant="h5">Discount Apllied!!</Typography>
+      <Typography variant="h5">
         Price Before Discount:{" "}
         <PriceFormatter price={totalPriceBeforeDiscount} />
-      </h3>
-      <h3>
+      </Typography>
+      <Typography variant="h5">
         Price After Discount: <PriceFormatter price={totalPriceAfterDiscount} />
-      </h3>
-      <h3>
+      </Typography>
+      <Typography variant="h5">
         You Saved{" "}
         <PriceFormatter
           price={totalPriceBeforeDiscount - totalPriceAfterDiscount}
         />
-      </h3>
+      </Typography>
     </Fragment>
   );
 
   const TotalPrice = isDiscountApplied ? (
     discountAppliedRelatedElements
   ) : (
-    <h3>
+    <Typography variant="h5">
       Total Price: <PriceFormatter price={totalPriceBeforeDiscount} />
-    </h3>
+    </Typography>
   );
 
   const sendTransactionHandler = () => {
@@ -64,37 +65,42 @@ function CartManager() {
   return (
     <div>
       {!cartProducts?.length ? (
-        "Cart Is Empty"
+        <Typography className={styles["cart-empty"]} variant="h5">
+          Cart Is Empty
+        </Typography>
       ) : (
         <Fragment>
-          <div>
-            <button
-              className={styles["cart-button"]}
-              onClick={clearCartHandler}
-            >
-              Clear Cart
-            </button>
-          </div>
+          <Button
+            className={styles["clear-cart"]}
+            variant="contained"
+            onClick={clearCartHandler}
+          >
+            Clear Cart
+          </Button>
           <Products
             products={cartProducts}
             showAddToCartBtn={false}
             isCart={true}
           />
 
-          {TotalPrice}
+          <div className={styles.pricing}>
+            {TotalPrice}
 
-          {isLoggedin ? (
-            <div>
-              <button
-                className={styles["cart-button"]}
-                onClick={sendTransactionHandler}
-              >
-                Submit Transaction
-              </button>
+            <div className={styles["submit-button"]}>
+              {isLoggedin ? (
+                <Button variant="contained" onClick={sendTransactionHandler}>
+                  Submit Transaction
+                </Button>
+              ) : (
+                <Typography
+                  className={styles["must-login-message"]}
+                  variant="h5"
+                >
+                  {messages.NOT_LOGGED_IN_TRANSACTION}
+                </Typography>
+              )}
             </div>
-          ) : (
-            messages.NOT_LOGGED_IN_TRANSACTION
-          )}
+          </div>
         </Fragment>
       )}
     </div>
