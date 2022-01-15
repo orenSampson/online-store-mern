@@ -17,13 +17,15 @@ import styles from "./AuthForm.module.scss";
 function AuthForm() {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState(null);
-
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(null);
-
   const [isLoginMode, setIsLoginMode] = useState(true);
+
+  const email = useSelector((state) => state.authReducers.email);
+  const emailError = useSelector((state) => state.authReducers.emailError);
+
+  const password = useSelector((state) => state.authReducers.password);
+  const passwordError = useSelector(
+    (state) => state.authReducers.passwordError
+  );
 
   const isLoading = useSelector((state) => state.loadingReducers.isLoading);
   const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
@@ -63,20 +65,10 @@ function AuthForm() {
         {isLoginMode ? "Login" : "Sign Up"}
       </Typography>
 
-      <EmailTextField
-        email={email}
-        setEmail={setEmail}
-        emailError={emailError}
-        setEmailError={setEmailError}
-      />
+      <EmailTextField />
 
       <div className={styles.PasswordField}>
-        <PasswordTextField
-          password={password}
-          setPassword={setPassword}
-          passwordError={passwordError}
-          setPasswordError={setPasswordError}
-        />
+        <PasswordTextField />
       </div>
 
       {!isLoading && (

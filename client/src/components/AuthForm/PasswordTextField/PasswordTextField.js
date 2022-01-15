@@ -1,32 +1,45 @@
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
 
 import * as messages from "../../../constants/messages";
+import * as authActions from "../../../store/auth/actions";
+import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 import * as loginSignupConsts from "../../../constants/loginSignup";
 import styles from "./PasswordTextField.module.scss";
 
 let passwordTimeoutID = null;
 
-const PasswordTextField = (props) => {
+const PasswordTextField = () => {
+  const dispatch = useDispatch();
+
   const passwordInputRef = useRef();
+
+  const passwordError = useSelector(
+    (state) => state.authReducers.passwordError
+  );
 
   useEffect(() => {
     return () => {
       clearTimeoutAndPasswordError();
+
+      dispatch(authActions.auth_password_setter(AUTH_INITIAL_STATE.password));
     };
-  });
+  }, [dispatch]);
 
   const passwordValidator = () => {
     if (passwordInputRef.current.value.length === 0) {
-      props.setPasswordError(messages.FIELD_IS_EMPTY);
+      dispatch(authActions.auth_passwordError_setter(messages.FIELD_IS_EMPTY));
     } else {
       if (
         passwordInputRef.current.value.length <
         loginSignupConsts.PASSWORD_MIN_LENGTH
       ) {
-        props.setPasswordError(messages.PASSWORD_NOT_VALID);
+        dispatch(
+          authActions.auth_passwordError_setter(messages.PASSWORD_NOT_VALID)
+        );
       } else {
-        props.setPasswordError(messages.FIELD_IS_OK);
+        dispatch(authActions.auth_passwordError_setter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -35,11 +48,13 @@ const PasswordTextField = (props) => {
     clearTimeout(passwordTimeoutID);
     passwordTimeoutID = null;
 
-    props.setPasswordError(null);
+    dispatch(
+      authActions.auth_passwordError_setter(AUTH_INITIAL_STATE.passwordError)
+    );
   };
 
   const checkOnChangeHandler = () => {
-    props.setPassword(passwordInputRef.current.value);
+    dispatch(authActions.auth_password_setter(passwordInputRef.current.value));
 
     clearTimeoutAndPasswordError();
 
@@ -62,14 +77,9 @@ const PasswordTextField = (props) => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={
-        !!props.passwordError && props.passwordError !== messages.FIELD_IS_OK
-      }
-      helperText={
-        props.passwordError === messages.FIELD_IS_OK ? "" : props.passwordError
-      }
+      error={!!passwordError && passwordError !== messages.FIELD_IS_OK}
+      helperText={passwordError === messages.FIELD_IS_OK ? "" : passwordError}
       inputRef={passwordInputRef}
-      defaultValue={props.password}
       margin="normal"
       color="success"
     />

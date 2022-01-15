@@ -1,29 +1,38 @@
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
 import validator from "validator";
 
 import * as messages from "../../../constants/messages";
+import * as authActions from "../../../store/auth/actions";
+import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 import styles from "./EmailTextField.module.scss";
 
 let emailTimeoutID;
 
-const EmailTextField = (props) => {
+const EmailTextField = () => {
+  const dispatch = useDispatch();
+
   const emailInputRef = useRef();
+
+  const emailError = useSelector((state) => state.authReducers.emailError);
 
   useEffect(() => {
     return () => {
       clearTimeoutAndEmailError();
+
+      dispatch(authActions.auth_email_setter(AUTH_INITIAL_STATE.email));
     };
-  });
+  }, [dispatch]);
 
   const emailValidator = () => {
     if (emailInputRef.current.value === "") {
-      props.setEmailError(messages.FIELD_IS_EMPTY);
+      dispatch(authActions.auth_emailError_setter(messages.FIELD_IS_EMPTY));
     } else {
       if (!validator.isEmail(emailInputRef.current.value)) {
-        props.setEmailError(messages.EMAIL_NOT_VALID);
+        dispatch(authActions.auth_emailError_setter(messages.EMAIL_NOT_VALID));
       } else {
-        props.setEmailError(messages.FIELD_IS_OK);
+        dispatch(authActions.auth_emailError_setter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -32,11 +41,11 @@ const EmailTextField = (props) => {
     clearTimeout(emailTimeoutID);
     emailTimeoutID = null;
 
-    props.setEmailError(null);
+    dispatch(authActions.auth_emailError_setter(AUTH_INITIAL_STATE.emailError));
   };
 
   const checkOnChangeHandler = () => {
-    props.setEmail(emailInputRef.current.value);
+    dispatch(authActions.auth_email_setter(emailInputRef.current.value));
 
     clearTimeoutAndEmailError();
 
@@ -59,12 +68,9 @@ const EmailTextField = (props) => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={!!props.emailError && props.emailError !== messages.FIELD_IS_OK}
-      helperText={
-        props.emailError === messages.FIELD_IS_OK ? "" : props.emailError
-      }
+      error={!!emailError && emailError !== messages.FIELD_IS_OK}
+      helperText={emailError === messages.FIELD_IS_OK ? "" : emailError}
       inputRef={emailInputRef}
-      defaultValue={props.email}
       margin="normal"
       color="success"
     />

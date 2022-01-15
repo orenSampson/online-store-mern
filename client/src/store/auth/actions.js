@@ -10,6 +10,26 @@ export const auth_loggedUserEmail_setter = (payload) => ({
   payload,
 });
 
+export const auth_email_setter = (payload) => ({
+  type: types.AUTH_EMAIL_SETTER,
+  payload,
+});
+
+export const auth_emailError_setter = (payload) => ({
+  type: types.AUTH_EMAIL_ERROR_SETTER,
+  payload,
+});
+
+export const auth_password_setter = (payload) => ({
+  type: types.AUTH_PASSWORD_SETTER,
+  payload,
+});
+
+export const auth_passwordError_setter = (payload) => ({
+  type: types.AUTH_PASSWORD_ERROR_SETTER,
+  payload,
+});
+
 export const auth_login_signup = (payload) => ({
   type: types.AUTH_LOGIN_SIGNUP,
   payload,
