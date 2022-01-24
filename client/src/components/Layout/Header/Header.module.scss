@@ -5,8 +5,6 @@
 }
 
 .main-header {
-  background: #2ddf5c;
-  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,21 +12,30 @@
 
 .main-header__burger {
   vertical-align: middle;
-  color: #0e4f1f;
+  color: azure;
   cursor: pointer;
 
-  @include media-min-width(40rem) {
+  &:hover,
+  &:active {
+    color: burlywood;
+  }
+
+  @include media-min-width(49rem) {
     display: none;
   }
 }
 
 .main-header__brand {
   vertical-align: middle;
-  color: #0e4f1f;
+  color: azure;
   cursor: pointer;
 
   &:hover,
   &:active {
-    color: white;
+    color: burlywood;
   }
+}
+
+.login-statusbar {
+  margin-left: 0.7rem;
 }

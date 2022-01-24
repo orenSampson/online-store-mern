@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-import Backdrop from "@mui/material/Backdrop";
+import { Backdrop, AppBar, Toolbar, Typography } from "@mui/material";
 
 import SideBar from "../SideBar/SideBar";
 import MainNav from "../MainNav/MainNav";
@@ -45,28 +45,33 @@ const Header = () => {
 
   return (
     <Fragment>
-      <header className={styles["main-header"]}>
-        <div>
-          <GiHamburgerMenu
-            className={styles["main-header__burger"]}
-            size={40}
-            onClick={switchShowSideBarHandler}
-          />
-
-          <NavLink to="/">
-            <IoStorefrontOutline
-              className={styles["main-header__brand"]}
+      <AppBar elevation={0}>
+        <Toolbar className={styles["main-header"]}>
+          <div>
+            <GiHamburgerMenu
+              className={styles["main-header__burger"]}
               size={40}
+              onClick={switchShowSideBarHandler}
             />
-          </NavLink>
+            <NavLink to="/">
+              <IoStorefrontOutline
+                className={styles["main-header__brand"]}
+                size={40}
+              />
+            </NavLink>
 
-          <span>
-            {loggedInEmail ? `logged in as: ${loggedInEmail}` : "logged out"}
-          </span>
-        </div>
+            <span className={styles["login-statusbar"]}>
+              <Typography display="inline">
+                {loggedInEmail
+                  ? `logged in as: ${loggedInEmail}`
+                  : "logged out"}
+              </Typography>
+            </span>
+          </div>
 
-        <MainNav />
-      </header>
+          <MainNav />
+        </Toolbar>
+      </AppBar>
 
       <Fragment>
         <Backdrop

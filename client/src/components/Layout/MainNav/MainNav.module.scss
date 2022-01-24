@@ -7,7 +7,7 @@
 .main-nav {
   display: none;
 
-  @include media-min-width(40rem) {
+  @include media-min-width(49rem) {
     display: block;
   }
 
@@ -25,11 +25,11 @@
 }
 
 .main-nav__cart {
-  color: #0e4f1f;
+  color: azure;
 
   &:hover,
   &:active {
-    color: white;
+    color: burlywood;
   }
 }
 
@@ -41,7 +41,6 @@
 
   &:hover,
   &:active {
-    color: white;
-    border-bottom: 5px solid white;
+    border-bottom: 5px solid burlywood;
   }
 }

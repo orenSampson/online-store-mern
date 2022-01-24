@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
+import { Toolbar } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 
 import MessageDisplayer from "../MessageDisplayer/MessageDisplayer";
@@ -11,6 +12,7 @@ const Layout = (props) => {
     <Fragment>
       <div className={styles.body}>
         <Header />
+        <Toolbar />
         <div className={styles.mainSite}>{props.children}</div>
       </div>
       <MessageDisplayer />

@@ -5,7 +5,6 @@ import { ConnectedRouter } from "connected-react-router";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import { startup } from "./store/startup/actions";
-import styles from "./App.module.scss";
 import Layout from "./components/Layout/Layout";
 import { history } from "./store/index";
 
@@ -35,7 +34,7 @@ const App = () => {
 
   return (
     <ConnectedRouter history={history}>
-      <div className={styles.App}>
+      <div>
         <Layout>
           <main>
             <Suspense fallback={<ClipLoader loading={true} size={150} />}>
