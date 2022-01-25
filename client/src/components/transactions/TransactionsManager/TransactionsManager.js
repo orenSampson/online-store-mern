@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 import Transaction from "../Transactions/Transaction";
 import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
@@ -29,7 +30,7 @@ function TransactionsManager() {
         productsAndAmound={transaction.productsAndAmound}
         discountPercentage={transaction.discountPercentage}
         totalPrice={transaction.totalPrice}
-        key={index}
+        key={uuidv4()}
       />
     );
   });
