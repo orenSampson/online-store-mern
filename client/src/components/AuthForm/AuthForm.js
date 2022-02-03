@@ -28,11 +28,6 @@ function AuthForm() {
   );
 
   const isLoading = useSelector((state) => state.loadingReducers.isLoading);
-  const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
-
-  const logoutHandler = () => {
-    dispatch(authActions.auth_logout());
-  };
 
   const switchAuthModeHandler = (event) => {
     if (event.target.value === "login") {
@@ -87,12 +82,6 @@ function AuthForm() {
         </Button>
       )}
       {isLoading && <Typography variant="body1">Sending request...</Typography>}
-
-      {isLoggedin && (
-        <Button variant="contained" onClick={logoutHandler}>
-          Logout
-        </Button>
-      )}
 
       <RadioGroup
         row

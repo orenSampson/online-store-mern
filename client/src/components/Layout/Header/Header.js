@@ -2,11 +2,12 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-import { Backdrop, AppBar, Toolbar, Typography } from "@mui/material";
+import { Backdrop, AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 import SideBar from "../SideBar/SideBar";
 import MainNav from "../MainNav/MainNav";
 import * as generalActions from "../../../store/general/actions";
+import * as authActions from "../../../store/auth/actions";
 import { GENERAL_INITIAL_STATE } from "../../../store/general/reducers";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -21,9 +22,15 @@ const Header = () => {
     (state) => state.generalReducers.showBackDrop
   );
 
+  const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
+
   const loggedInEmail = useSelector(
     (state) => state.authReducers.loggedUserEmail
   );
+
+  const logoutHandler = () => {
+    dispatch(authActions.auth_logout());
+  };
 
   const switchShowSideBarHandler = () => {
     dispatch(generalActions.general_showSideBar_setter(!showSideBar));
@@ -60,11 +67,22 @@ const Header = () => {
               />
             </NavLink>
 
+            <Button
+              variant="contained"
+              color="warning"
+              disableElevation
+              sx={{
+                display: isLoggedin ? "inline" : "none",
+                marginLeft: "1rem",
+              }}
+              onClick={logoutHandler}
+            >
+              Logout
+            </Button>
+
             <span className={styles["login-statusbar"]}>
               <Typography display="inline">
-                {loggedInEmail
-                  ? `logged in as: ${loggedInEmail}`
-                  : "logged out"}
+                {isLoggedin ? `logged in as: ${loggedInEmail}` : "logged out"}
               </Typography>
             </span>
           </div>
