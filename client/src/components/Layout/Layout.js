@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
-import { Toolbar } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 
 import MessageDisplayer from "../MessageDisplayer/MessageDisplayer";

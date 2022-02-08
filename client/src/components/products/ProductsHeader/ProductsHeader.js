@@ -3,6 +3,12 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import { v4 as uuidv4 } from "uuid";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+// import Typography from "@mui/material/Typography";
+// import Button from "@mui/material/Button";
+// import IconButton from "@mui/material/IconButton";
+// import MenuIcon from "@mui/icons-material/Menu";
 
 import styles from "./ProductsHeader.module.scss";
 
@@ -18,11 +24,13 @@ function ProductsHeader() {
         const to = `/categories/${category}`;
 
         return (
-          <li key={uuidv4()}>
-            <NavLink className={styles["ProductsHeader__item"]} to={to}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </NavLink>
-          </li>
+          <NavLink
+            className={styles["ProductsHeader__item"]}
+            key={uuidv4()}
+            to={to}
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </NavLink>
         );
       })
     : null;
@@ -32,9 +40,11 @@ function ProductsHeader() {
   return (
     <Fragment>
       <ClipLoader loading={isLoading} size={150} />
-      <nav className={styles["ProductsHeader"]}>
-        <ul>{NavigationLinks}</ul>
-      </nav>
+      <AppBar position="static">
+        <Toolbar className={styles["ProductsHeader"]}>
+          {NavigationLinks}
+        </Toolbar>
+      </AppBar>
     </Fragment>
   );
 }
