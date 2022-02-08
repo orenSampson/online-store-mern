@@ -52,7 +52,7 @@ const Header = () => {
 
   return (
     <Fragment>
-      <AppBar elevation={0}>
+      <AppBar elevation={0} position="static">
         <Toolbar className={styles["main-header"]}>
           <div>
             <GiHamburgerMenu

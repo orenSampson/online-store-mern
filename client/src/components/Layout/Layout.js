@@ -12,7 +12,6 @@ const Layout = (props) => {
     <Fragment>
       <div className={styles.body}>
         <Header />
-        <Toolbar />
         <div className={styles.mainSite}>{props.children}</div>
       </div>
       <MessageDisplayer />
