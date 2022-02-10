@@ -6,9 +6,14 @@ import * as messages from "../../../constants/messages";
 import * as authActions from "../../../store/auth/actions";
 import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 import * as loginSignupConsts from "../../../constants/loginSignup";
-import styles from "./PasswordTextField.module.scss";
 
 let passwordTimeoutID = null;
+
+const styles = {
+  PasswordTextField: {
+    width: "23rem",
+  },
+};
 
 const PasswordTextField = () => {
   const dispatch = useDispatch();
@@ -23,12 +28,15 @@ const PasswordTextField = () => {
     return () => {
       clearTimeoutAndPasswordError();
 
-      dispatch(authActions.auth_password_setter(AUTH_INITIAL_STATE.password));
+      dispatch(authActions.auth_password_reset());
     };
   }, [dispatch]);
 
   const passwordValidator = () => {
-    if (passwordInputRef.current.value.length === 0) {
+    if (
+      passwordInputRef.current.value.length ===
+      AUTH_INITIAL_STATE.password.length
+    ) {
       dispatch(authActions.auth_passwordError_setter(messages.FIELD_IS_EMPTY));
     } else {
       if (
@@ -48,9 +56,7 @@ const PasswordTextField = () => {
     clearTimeout(passwordTimeoutID);
     passwordTimeoutID = null;
 
-    dispatch(
-      authActions.auth_passwordError_setter(AUTH_INITIAL_STATE.passwordError)
-    );
+    dispatch(authActions.auth_passwordError_reset());
   };
 
   const checkOnChangeHandler = () => {
@@ -69,7 +75,7 @@ const PasswordTextField = () => {
 
   return (
     <TextField
-      className={styles.PasswordTextField}
+      sx={styles.PasswordTextField}
       label="Password"
       variant="outlined"
       type="password"
@@ -77,8 +83,12 @@ const PasswordTextField = () => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={!!passwordError && passwordError !== messages.FIELD_IS_OK}
-      helperText={passwordError === messages.FIELD_IS_OK ? "" : passwordError}
+      error={passwordError && passwordError !== messages.FIELD_IS_OK}
+      helperText={
+        passwordError === messages.FIELD_IS_OK
+          ? AUTH_INITIAL_STATE.passwordError
+          : passwordError
+      }
       inputRef={passwordInputRef}
       margin="normal"
       color="success"
