@@ -1,4 +1,5 @@
 import * as types from "./types";
+import { AUTH_INITIAL_STATE } from "./reducers";
 
 export const auth_isLoggedin_setter = (payload) => ({
   type: types.AUTH_ISLOGGEDIN_SETTER,
@@ -28,6 +29,36 @@ export const auth_password_setter = (payload) => ({
 export const auth_passwordError_setter = (payload) => ({
   type: types.AUTH_PASSWORD_ERROR_SETTER,
   payload,
+});
+
+export const auth_isLoggedin_reset = () => ({
+  type: types.AUTH_ISLOGGEDIN_SETTER,
+  payload: AUTH_INITIAL_STATE.isLoggedin,
+});
+
+export const auth_loggedUserEmail_reset = () => ({
+  type: types.AUTH_LOGGEDUSEREMAIL_SETTER,
+  payload: AUTH_INITIAL_STATE.loggedUserEmail,
+});
+
+export const auth_email_reset = () => ({
+  type: types.AUTH_EMAIL_SETTER,
+  payload: AUTH_INITIAL_STATE.email,
+});
+
+export const auth_emailError_reset = () => ({
+  type: types.AUTH_EMAIL_ERROR_SETTER,
+  payload: AUTH_INITIAL_STATE.emailError,
+});
+
+export const auth_password_reset = () => ({
+  type: types.AUTH_PASSWORD_SETTER,
+  payload: AUTH_INITIAL_STATE.password,
+});
+
+export const auth_passwordError_reset = () => ({
+  type: types.AUTH_PASSWORD_ERROR_SETTER,
+  payload: AUTH_INITIAL_STATE.passwordError,
 });
 
 export const auth_login_signup = (payload) => ({
