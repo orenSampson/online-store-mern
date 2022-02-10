@@ -46,7 +46,7 @@ const EmailTextField = () => {
     clearTimeout(emailTimeoutID);
     emailTimeoutID = null;
 
-    dispatch(authActions.auth_emailError_setter(AUTH_INITIAL_STATE.emailError));
+    dispatch(authActions.auth_emailError_reset());
   };
 
   const checkOnChangeHandler = () => {
