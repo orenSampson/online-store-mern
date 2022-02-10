@@ -6,9 +6,14 @@ import validator from "validator";
 import * as messages from "../../../constants/messages";
 import * as authActions from "../../../store/auth/actions";
 import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
-import styles from "./EmailTextField.module.scss";
 
 let emailTimeoutID;
+
+const styles = {
+  EmailTextField: {
+    width: "23rem",
+  },
+};
 
 const EmailTextField = () => {
   const dispatch = useDispatch();
@@ -21,12 +26,12 @@ const EmailTextField = () => {
     return () => {
       clearTimeoutAndEmailError();
 
-      dispatch(authActions.auth_email_setter(AUTH_INITIAL_STATE.email));
+      dispatch(authActions.auth_email_reset());
     };
   }, [dispatch]);
 
   const emailValidator = () => {
-    if (emailInputRef.current.value === "") {
+    if (emailInputRef.current.value === AUTH_INITIAL_STATE.email) {
       dispatch(authActions.auth_emailError_setter(messages.FIELD_IS_EMPTY));
     } else {
       if (!validator.isEmail(emailInputRef.current.value)) {
@@ -60,7 +65,7 @@ const EmailTextField = () => {
 
   return (
     <TextField
-      className={styles.EmailTextField}
+      sx={styles.EmailTextField}
       label="Email"
       variant="outlined"
       type="email"
@@ -68,8 +73,12 @@ const EmailTextField = () => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={!!emailError && emailError !== messages.FIELD_IS_OK}
-      helperText={emailError === messages.FIELD_IS_OK ? "" : emailError}
+      error={emailError && emailError !== messages.FIELD_IS_OK}
+      helperText={
+        emailError === messages.FIELD_IS_OK
+          ? AUTH_INITIAL_STATE.emailError
+          : emailError
+      }
       inputRef={emailInputRef}
       margin="normal"
       color="success"
