@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const PasswordTextField = () => {
+const PasswordTextField = (props) => {
   const dispatch = useDispatch();
 
   const passwordInputRef = useRef();
@@ -71,6 +71,11 @@ const PasswordTextField = () => {
     clearTimeoutAndPasswordError();
 
     passwordValidator();
+  };
+
+  styles.PasswordTextField = {
+    ...styles.PasswordTextField,
+    ...(props.customStyle || {}),
   };
 
   return (

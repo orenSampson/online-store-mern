@@ -15,7 +15,7 @@ const styles = {
   },
 };
 
-const EmailTextField = () => {
+const EmailTextField = (props) => {
   const dispatch = useDispatch();
 
   const emailInputRef = useRef();
@@ -61,6 +61,11 @@ const EmailTextField = () => {
     clearTimeoutAndEmailError();
 
     emailValidator();
+  };
+
+  styles.EmailTextField = {
+    ...styles.EmailTextField,
+    ...(props.customStyle || {}),
   };
 
   return (
