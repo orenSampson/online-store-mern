@@ -83,7 +83,7 @@ const PasswordTextField = () => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={passwordError && passwordError !== messages.FIELD_IS_OK}
+      error={!!passwordError && passwordError !== messages.FIELD_IS_OK}
       helperText={
         passwordError === messages.FIELD_IS_OK
           ? AUTH_INITIAL_STATE.passwordError

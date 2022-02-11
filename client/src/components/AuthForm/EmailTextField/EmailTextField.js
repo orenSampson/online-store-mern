@@ -73,7 +73,7 @@ const EmailTextField = () => {
       onBlur={checkOnBlurHandler}
       onFocus={checkOnChangeHandler}
       onChange={checkOnChangeHandler}
-      error={emailError && emailError !== messages.FIELD_IS_OK}
+      error={!!emailError && emailError !== messages.FIELD_IS_OK}
       helperText={
         emailError === messages.FIELD_IS_OK
           ? AUTH_INITIAL_STATE.emailError
