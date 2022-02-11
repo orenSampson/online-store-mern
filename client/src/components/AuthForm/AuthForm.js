@@ -6,13 +6,33 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Box,
 } from "@mui/material";
 
 import EmailTextField from "./EmailTextField/EmailTextField";
 import PasswordTextField from "./PasswordTextField/PasswordTextField";
 import * as messages from "../../constants/messages";
 import * as authActions from "../../store/auth/actions";
-import styles from "./AuthForm.module.scss";
+
+const styles = {
+  AuthForm: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  PasswordField: {
+    marginBottom: "1rem",
+  },
+
+  SubmitButton: {
+    marginBottom: "1rem",
+  },
+
+  mandatory: {
+    color: "red",
+  },
+};
 
 function AuthForm() {
   const dispatch = useDispatch();
@@ -50,25 +70,22 @@ function AuthForm() {
   };
 
   return (
-    <form
-      className={styles.AuthForm}
+    <Box
+      component="form"
+      sx={styles.AuthForm}
       onSubmit={submitHandler}
       noValidate
       autoComplete="off"
     >
-      <Typography variant="h2" gutterBottom>
-        {isLoginMode ? "Login" : "Sign Up"}
-      </Typography>
+      <Typography variant="h2">{isLoginMode ? "Login" : "Sign Up"}</Typography>
 
       <EmailTextField />
 
-      <div className={styles.PasswordField}>
-        <PasswordTextField />
-      </div>
+      <PasswordTextField customStyle={styles.PasswordField} />
 
-      {!isLoading && (
+      {!isLoading ? (
         <Button
-          className={styles.SubmitButton}
+          sx={styles.SubmitButton}
           variant="contained"
           disabled={
             !(
@@ -80,8 +97,9 @@ function AuthForm() {
         >
           {isLoginMode ? "Login" : "Sign Up"}
         </Button>
+      ) : (
+        <Typography variant="body1">Sending request...</Typography>
       )}
-      {isLoading && <Typography variant="body1">Sending request...</Typography>}
 
       <RadioGroup
         row
@@ -92,10 +110,10 @@ function AuthForm() {
         <FormControlLabel value="signup" control={<Radio />} label="Sign Up" />
       </RadioGroup>
 
-      <Typography className={styles.mandatory} variant="body1">
+      <Typography sx={styles.mandatory} variant="body1">
         * Mandatory fields
       </Typography>
-    </form>
+    </Box>
   );
 }
 
