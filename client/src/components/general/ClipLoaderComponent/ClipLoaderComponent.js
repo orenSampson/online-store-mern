@@ -1,12 +1,24 @@
 import ClipLoader from "react-spinners/ClipLoader";
+import { Box } from "@mui/material";
 
-import styles from "./ClipLoaderComponent.module.scss";
+const styles = {
+  ClipLoaderComponent: {
+    position: "fixed",
+    top: "40%",
+    left: "45%",
+  },
+};
 
 const ClipLoaderComponent = (props) => {
+  styles.ClipLoaderComponent = {
+    ...styles.ClipLoaderComponent,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <div className={styles.ClipLoaderComponent}>
+    <Box sx={styles.ClipLoaderComponent}>
       <ClipLoader loading={props.isLoading} size={150} />
-    </div>
+    </Box>
   );
 };
 
