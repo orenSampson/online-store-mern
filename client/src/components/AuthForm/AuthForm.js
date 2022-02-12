@@ -34,7 +34,7 @@ const styles = {
   },
 };
 
-function AuthForm() {
+function AuthForm(props) {
   const dispatch = useDispatch();
 
   const [isLoginMode, setIsLoginMode] = useState(true);
@@ -67,6 +67,11 @@ function AuthForm() {
         password,
       })
     );
+  };
+
+  styles.AuthForm = {
+    ...styles.AuthForm,
+    ...(props.customStyle || {}),
   };
 
   return (
