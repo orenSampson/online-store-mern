@@ -1,14 +1,36 @@
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import * as cartActions from "../../../store/cart/actions";
 import Products from "../../products/Products/Products";
 import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import * as messages from "../../../store/constants/messages";
-import styles from "./CartManager.module.scss";
 
-function CartManager() {
+const styles = {
+  CartManager: {},
+  cartEmpty: {
+    textAlign: "center",
+  },
+  clearCart: {
+    marginTop: "0.5rem",
+    marginLeft: "0.5rem",
+  },
+  pricing: {
+    marginTop: "0.5rem",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  submitButton: {
+    marginTop: "0.5rem",
+  },
+  mustLoginMessage: {
+    color: "red",
+  },
+};
+
+function CartManager(props) {
   const dispatch = useDispatch();
 
   const cartProducts = useSelector((state) => state.cartReducers.products);
@@ -26,6 +48,14 @@ function CartManager() {
   );
 
   const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
+
+  const sendTransactionHandler = () => {
+    dispatch(cartActions.cart_send_transaction());
+  };
+
+  const clearCartHandler = () => {
+    dispatch(cartActions.cart_clear_cart());
+  };
 
   const discountAppliedRelatedElements = (
     <Fragment>
@@ -54,24 +84,21 @@ function CartManager() {
     </Typography>
   );
 
-  const sendTransactionHandler = () => {
-    dispatch(cartActions.cart_send_transaction());
-  };
-
-  const clearCartHandler = () => {
-    dispatch(cartActions.cart_clear_cart());
+  styles.CartManager = {
+    ...styles.CartManager,
+    ...(props.customStyle || {}),
   };
 
   return (
-    <div>
+    <Box sx={styles.CartManager}>
       {!cartProducts?.length ? (
-        <Typography className={styles["cart-empty"]} variant="h5">
+        <Typography sx={styles.cartEmpty} variant="h5">
           Cart Is Empty
         </Typography>
       ) : (
         <Fragment>
           <Button
-            className={styles["clear-cart"]}
+            sx={styles.clearCart}
             variant="contained"
             onClick={clearCartHandler}
           >
@@ -83,27 +110,24 @@ function CartManager() {
             isCart={true}
           />
 
-          <div className={styles.pricing}>
+          <Box sx={styles.pricing}>
             {TotalPrice}
 
-            <div className={styles["submit-button"]}>
+            <Box sx={styles.submitButton}>
               {isLoggedin ? (
                 <Button variant="contained" onClick={sendTransactionHandler}>
                   Submit Transaction
                 </Button>
               ) : (
-                <Typography
-                  className={styles["must-login-message"]}
-                  variant="h5"
-                >
+                <Typography sx={styles.mustLoginMessage} variant="h5">
                   {messages.NOT_LOGGED_IN_TRANSACTION}
                 </Typography>
               )}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </Fragment>
       )}
-    </div>
+    </Box>
   );
 }
 
