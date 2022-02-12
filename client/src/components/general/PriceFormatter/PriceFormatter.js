@@ -1,5 +1,9 @@
-import React, { Fragment } from "react";
 import numeral from "numeral";
+import { Box } from "@mui/material";
+
+const styles = {
+  PriceFormatter: {},
+};
 
 const PriceFormatter = (props) => {
   const priceObj = {
@@ -8,13 +12,18 @@ const PriceFormatter = (props) => {
       Math.floor((props.price - Math.floor(props.price)) * 100) || "00",
   };
 
+  styles.PriceFormatter = {
+    ...styles.PriceFormatter,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <Fragment>
+    <Box sx={styles.PriceFormatter}>
       {priceObj.whole}
       <small>
         <sup>{priceObj.remainder}</sup>
       </small>
-    </Fragment>
+    </Box>
   );
 };
 
