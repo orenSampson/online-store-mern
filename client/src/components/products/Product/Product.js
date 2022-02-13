@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import CardActions from "@mui/material/CardActions";
-import CardActionArea from "@mui/material/CardActionArea";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  CardActions,
+  CardActionArea,
+  Box,
+} from "@mui/material";
 
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
 import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
@@ -15,9 +18,45 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import * as cartActions from "../../../store/cart/actions";
 import ProductModal from "../ProductModal/ProductModal";
 import Backdrop from "../../Layout/Backdrop/Backdrop";
-import styles from "./Product.module.scss";
 
 const charCount = 35;
+
+const styles = {
+  Product: {},
+  ProductCard: {
+    width: "16rem",
+    margin: "1rem 0.2rem 0.5rem 0.2rem",
+  },
+
+  ProductPicture: {
+    height: "10rem",
+    objectFit: "contain",
+  },
+
+  ProductTitle: {
+    height: "4.5rem",
+    textAlign: "center",
+  },
+
+  ProductCategory: {
+    height: "2rem",
+  },
+
+  ProductAmount: {
+    height: "2.5rem",
+  },
+
+  ProductCardActions: {
+    justifyContent: "center",
+  },
+
+  cardContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+};
 
 const Product = (props) => {
   const dispatch = useDispatch();
@@ -50,9 +89,14 @@ const Product = (props) => {
     setIsProductModalOpen(false);
   };
 
+  styles.Product = {
+    ...styles.Product,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <div>
-      <div>
+    <Box sx={styles.Product}>
+      <Box>
         <Backdrop showBackDrop={isProductModalOpen} />
         <OutsideClickHandler onOutsideClick={closeProductModalHandler}>
           <ProductModal
@@ -67,36 +111,28 @@ const Product = (props) => {
             show={isProductModalOpen}
           />
         </OutsideClickHandler>
-      </div>
-      <Card className={styles["Product"]} elevation={1}>
+      </Box>
+      <Card sx={styles.ProductCard} elevation={1}>
         <CardActionArea onClick={openProductModalHandler}>
           <CardMedia
-            className={styles["Product-picture"]}
+            sx={styles.ProductPicture}
             component="img"
             image={props.image}
             alt="image"
           />
-          <CardContent>
-            <Typography
-              className={styles["Product-title"]}
-              gutterBottom
-              variant="h6"
-            >
+          <CardContent sx={styles.cardContent}>
+            <Typography sx={styles.ProductTitle} gutterBottom variant="h6">
               {shortTitle}
             </Typography>
             <Typography
-              className={styles["Product-category"]}
+              sx={styles.ProductCategory}
               gutterBottom
               variant="body1"
               noWrap
             >
               {props.category}
             </Typography>
-            <Typography
-              className={styles["Product-amount"]}
-              gutterBottom
-              variant="h6"
-            >
+            <Typography sx={styles.ProductAmount} gutterBottom variant="h6">
               <ShowAmount
                 amount={props.amount}
                 showAddToCartBtn={props.showAddToCartBtn}
@@ -109,7 +145,7 @@ const Product = (props) => {
           </CardContent>
         </CardActionArea>
         {props.showAddToCartBtn ? (
-          <CardActions className={styles["Product-CardActions"]}>
+          <CardActions sx={styles.ProductCardActions}>
             <Button
               variant="contained"
               size="large"
@@ -123,7 +159,7 @@ const Product = (props) => {
           </CardActions>
         ) : null}
       </Card>
-    </div>
+    </Box>
   );
 };
 
