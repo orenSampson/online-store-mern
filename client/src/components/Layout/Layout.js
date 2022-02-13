@@ -1,18 +1,33 @@
-import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Box } from "@mui/material";
 
 import MessageDisplayer from "../MessageDisplayer/MessageDisplayer";
 import Header from "./Header/Header";
-import styles from "./Layout.module.scss";
+
+const styles = {
+  Layout: {},
+  body: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  mainSite: {
+    flex: 1,
+  },
+};
 
 const Layout = (props) => {
+  styles.Layout = {
+    ...styles.Layout,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <Fragment>
-      <div className={styles.body}>
+    <Box sx={styles.Layout}>
+      <Box sx={styles.body}>
         <Header />
-        <div className={styles.mainSite}>{props.children}</div>
-      </div>
+        <Box sx={styles.mainSite}>{props.children}</Box>
+      </Box>
       <MessageDisplayer />
       <ToastContainer
         position="bottom-center"
@@ -25,7 +40,7 @@ const Layout = (props) => {
         draggable
         pauseOnHover
       />
-    </Fragment>
+    </Box>
   );
 };
 
