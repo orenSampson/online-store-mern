@@ -1,7 +1,10 @@
 import Pagination from "@mui/material/Pagination";
 import { useDispatch } from "react-redux";
+import { Box } from "@mui/material";
 
-import styles from "./PaginationComponent.module.scss";
+const styles = {
+  PaginationComponent: { display: "flex", justifyContent: "center" },
+};
 
 export default function PaginationComponent(props) {
   const dispatch = useDispatch();
@@ -15,8 +18,13 @@ export default function PaginationComponent(props) {
     );
   };
 
+  styles.PaginationComponent = {
+    ...styles.PaginationComponent,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <div className={styles["PaginationComponent"]}>
+    <Box sx={styles.PaginationComponent}>
       <Pagination
         size="large"
         variant="outlined"
@@ -25,6 +33,6 @@ export default function PaginationComponent(props) {
         page={props.currentPage}
         onChange={handleChange}
       />
-    </div>
+    </Box>
   );
 }
