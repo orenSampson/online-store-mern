@@ -4,12 +4,6 @@
   }
 }
 
-.main-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .main-header__burger {
   vertical-align: middle;
   color: azure;
@@ -34,8 +28,4 @@
   &:active {
     color: burlywood;
   }
-}
-
-.login-statusbar {
-  margin-left: 0.7rem;
 }

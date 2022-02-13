@@ -2,7 +2,14 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-import { Backdrop, AppBar, Toolbar, Typography, Button } from "@mui/material";
+import {
+  Backdrop,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+} from "@mui/material";
 
 import SideBar from "../SideBar/SideBar";
 import MainNav from "../MainNav/MainNav";
@@ -13,7 +20,29 @@ import { IoStorefrontOutline } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const sxStyles = (props) => ({
+  Header: {},
+  mainHeader: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  leftIcons: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  loginStatusbar: {
+    marginLeft: "0.7rem",
+  },
+  logout: {
+    display: props.isLoggedin ? "inline" : "none",
+    marginLeft: "1rem",
+  },
+  Backdrop: { color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 },
+});
+
+const Header = (props) => {
   const dispatch = useDispatch();
 
   const showSideBar = useSelector((state) => state.generalReducers.showSideBar);
@@ -50,58 +79,60 @@ const Header = () => {
     );
   };
 
+  sxStyles({ isLoggedin }).Header = {
+    ...styles.Header,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <Fragment>
+    <Box sx={sxStyles({ isLoggedin }).Header}>
       <AppBar elevation={0} position="static">
-        <Toolbar className={styles["main-header"]}>
-          <div>
-            <GiHamburgerMenu
-              className={styles["main-header__burger"]}
-              size={40}
-              onClick={switchShowSideBarHandler}
-            />
-            <NavLink to="/">
-              <IoStorefrontOutline
-                className={styles["main-header__brand"]}
+        <Toolbar sx={sxStyles({ isLoggedin }).mainHeader}>
+          <Box sx={sxStyles({ isLoggedin }).leftIcons}>
+            <Box component="span">
+              <GiHamburgerMenu
+                className={styles["main-header__burger"]}
                 size={40}
+                onClick={switchShowSideBarHandler}
               />
-            </NavLink>
 
-            <Button
-              variant="contained"
-              color="warning"
-              disableElevation
-              sx={{
-                display: isLoggedin ? "inline" : "none",
-                marginLeft: "1rem",
-              }}
-              onClick={logoutHandler}
-            >
-              Logout
-            </Button>
+              <NavLink to="/">
+                <IoStorefrontOutline
+                  className={styles["main-header__brand"]}
+                  size={40}
+                />
+              </NavLink>
 
-            <span className={styles["login-statusbar"]}>
+              <Button
+                sx={sxStyles({ isLoggedin }).logout}
+                variant="contained"
+                color="warning"
+                disableElevation
+                onClick={logoutHandler}
+              >
+                Logout
+              </Button>
+            </Box>
+
+            <Box component="span" sx={sxStyles({ isLoggedin }).loginStatusbar}>
               <Typography display="inline">
                 {isLoggedin ? `logged in as: ${loggedInEmail}` : "logged out"}
               </Typography>
-            </span>
-          </div>
+            </Box>
+          </Box>
 
           <MainNav />
         </Toolbar>
       </AppBar>
 
       <Fragment>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={showBackDrop}
-        >
+        <Backdrop sx={sxStyles({ isLoggedin }).Backdrop} open={showBackDrop}>
           <OutsideClickHandler onOutsideClick={closeShowSideBarHandler}>
             <SideBar />
           </OutsideClickHandler>
         </Backdrop>
       </Fragment>
-    </Fragment>
+    </Box>
   );
 };
 
