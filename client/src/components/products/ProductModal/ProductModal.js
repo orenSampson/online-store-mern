@@ -6,18 +6,32 @@ import Typography from "@mui/material/Typography";
 
 import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
 import ShowAmount from "../../general/ShowAmount/ShowAmount";
-import styles from "./ProductModal.module.scss";
 
 const ProductModal = (props) => {
-  const cssClasses = [
-    styles["ProductModal"],
-    props.show ? styles["ProductModalOpen"] : styles["ProductModalClosed"],
-  ];
+  const styles = {
+    ProductModal: {
+      position: "fixed",
+      zIndex: 200,
+      top: "20%",
+      left: "25%",
+      width: "50%",
+      display: props.show ? "block" : "none",
+    },
+
+    ProductModal_CardMedia: {
+      height: "14rem",
+    },
+  };
+
+  styles.ProductModal = {
+    ...styles.ProductModal,
+    ...(props.customStyle || {}),
+  };
 
   return (
-    <Card className={cssClasses.join(" ")}>
+    <Card sx={styles.ProductModal}>
       <CardMedia
-        className={styles["ProductModal-CardMedia"]}
+        sx={styles.ProductModal_CardMedia}
         component="img"
         image={props.image}
         alt="image"
