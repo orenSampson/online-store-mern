@@ -5,6 +5,7 @@ import * as authActions from "./actions";
 import * as loadingActions from "../loading/actions";
 import * as messageQueueActions from "../messageQueue/actions";
 import * as cartActions from "../cart/actions";
+import * as transactionsActions from "../transactions/actions";
 import { requestAuth } from "../../api/authAPI";
 import { TOKEN_NAME, LOGGED_USER_EMAIL } from "../constants/auth";
 import { AUTH_INITIAL_STATE } from "./reducers";
@@ -38,6 +39,8 @@ export function* authLogoutHandler() {
   yield put(authActions.auth_isLoggedin_setter(AUTH_INITIAL_STATE.isLoggedin));
 
   yield put(cartActions.cart_clear_cart());
+
+  yield put(transactionsActions.transactions_reset_state());
 
   yield put(
     messageQueueActions.messagequeue_addMessage({

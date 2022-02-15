@@ -8,3 +8,7 @@ export const transactions_transactions_setter = (payload) => ({
 export const transactions_get_transactions = () => ({
   type: types.TRANSACTIONS_GET_TRANSACTIONS,
 });
+
+export const transactions_reset_state = () => ({
+  type: types.TRANSACTIONS_RESET_STATE,
+});

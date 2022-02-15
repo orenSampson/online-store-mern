@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import Transaction from "../Transactions/Transaction";
 import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
@@ -19,6 +19,14 @@ function TransactionsManager(props) {
   );
 
   const isLoading = useSelector((state) => state.loadingReducers.isLoading);
+
+  const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
+
+  useEffect(() => {
+    if (isLoggedin) {
+      dispatch(transactionsActions.transactions_get_transactions());
+    }
+  }, [dispatch, isLoggedin]);
 
   const transactionsComponents = transactions.map((transaction, index) => {
     let currentDate = new Date(transaction.createdAt);
@@ -40,9 +48,15 @@ function TransactionsManager(props) {
     );
   });
 
-  useEffect(() => {
-    dispatch(transactionsActions.transactions_get_transactions());
-  }, [dispatch]);
+  const renderedContent = !isLoggedin ? (
+    <Typography variant="h5">
+      You must login inorder to watch your transactions history
+    </Typography>
+  ) : transactions.length === 0 ? (
+    <Typography variant="h5">You have no transactions yet</Typography>
+  ) : (
+    transactionsComponents
+  );
 
   styles.TransactionsManager = {
     ...styles.TransactionsManager,
@@ -51,7 +65,7 @@ function TransactionsManager(props) {
 
   return (
     <Box sx={styles.TransactionsManager}>
-      <Box>{transactionsComponents}</Box>;
+      {renderedContent}
       <ClipLoaderComponent isLoading={isLoading} />
     </Box>
   );
