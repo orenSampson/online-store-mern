@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { Box } from "@mui/material";
 
 import Transaction from "../Transactions/Transaction";
 import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
 import * as transactionsActions from "../../../store/transactions/actions";
 
-function TransactionsManager() {
+const styles = {
+  TransactionsManager: {},
+};
+
+function TransactionsManager(props) {
   const dispatch = useDispatch();
 
   const transactions = useSelector(
@@ -39,11 +44,16 @@ function TransactionsManager() {
     dispatch(transactionsActions.transactions_get_transactions());
   }, [dispatch]);
 
+  styles.TransactionsManager = {
+    ...styles.TransactionsManager,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <div>
-      <div>{transactionsComponents}</div>;
+    <Box sx={styles.TransactionsManager}>
+      <Box>{transactionsComponents}</Box>;
       <ClipLoaderComponent isLoading={isLoading} />
-    </div>
+    </Box>
   );
 }
 
