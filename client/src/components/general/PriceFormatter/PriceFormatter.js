@@ -18,7 +18,7 @@ const PriceFormatter = (props) => {
   };
 
   return (
-    <Box sx={styles.PriceFormatter}>
+    <Box component="span" sx={styles.PriceFormatter}>
       {priceObj.whole}
       <small>
         <sup>{priceObj.remainder}</sup>

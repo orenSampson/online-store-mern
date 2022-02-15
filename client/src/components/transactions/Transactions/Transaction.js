@@ -1,15 +1,38 @@
-import { Fragment } from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import Products from "../../products/Products/Products";
 import PriceFormatter from "../../general/PriceFormatter/PriceFormatter";
-import styles from "./Transaction.module.scss";
+
+const styles = {
+  Transaction: {},
+  date: {
+    marginLeft: "1%",
+    fontWeight: "bold",
+  },
+
+  date__span: {
+    textDecoration: "underline",
+  },
+
+  discountMsg: {
+    marginLeft: "1%",
+    fontWeight: "bold",
+  },
+};
 
 const Transaction = (props) => {
+  styles.Transaction = {
+    ...styles.Transaction,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <Fragment>
-      <Typography className={styles["date"]} variant="h6">
-        <span>Purchase Date:</span> {` ${props.createdAt}`}
+    <Box sx={styles.Transaction}>
+      <Typography sx={styles.date} variant="h6">
+        <Box sx={styles.date__span} component="span">
+          Purchase Date:
+        </Box>{" "}
+        {` ${props.createdAt}`}
       </Typography>
 
       <Products
@@ -18,18 +41,18 @@ const Transaction = (props) => {
         isCart={false}
       />
 
-      <Typography className={styles["discountMsg"]} variant="h6">
+      <Typography sx={styles.discountMsg} variant="h6">
         {props.discountPercentage &&
           `There was a ${props.discountPercentage}% discount`}
       </Typography>
 
-      <Typography className={styles["date"]} variant="h6">
-        <span>Total Price: </span>
+      <Typography sx={styles.date} variant="h6">
+        <Box component="span">Total Price: </Box>
         <PriceFormatter price={props.totalPrice} />
       </Typography>
 
       <hr />
-    </Fragment>
+    </Box>
   );
 };
 
