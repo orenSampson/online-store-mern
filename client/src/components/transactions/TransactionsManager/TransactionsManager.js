@@ -9,6 +9,9 @@ import * as transactionsActions from "../../../store/transactions/actions";
 
 const styles = {
   TransactionsManager: {},
+  messages: {
+    textAlign: "center",
+  },
 };
 
 function TransactionsManager(props) {
@@ -49,11 +52,13 @@ function TransactionsManager(props) {
   });
 
   const renderedContent = !isLoggedin ? (
-    <Typography variant="h5">
+    <Typography sx={styles.messages} variant="h5">
       You must login inorder to watch your transactions history
     </Typography>
   ) : transactions.length === 0 ? (
-    <Typography variant="h5">You have no transactions yet</Typography>
+    <Typography sx={styles.messages} variant="h5">
+      You have no transactions yet
+    </Typography>
   ) : (
     transactionsComponents
   );
