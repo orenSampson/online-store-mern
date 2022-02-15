@@ -1,14 +1,19 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import { Box } from "@mui/material";
 
 import Products from "../Products/Products";
 import PaginationComponent from "../../PaginationComponent/PaginationComponent";
 import ProductsHeader from "../ProductsHeader/ProductsHeader";
 import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
 import { get_products } from "../../../store/products/actions";
-import styles from "./ProductsManager.module.scss";
 
-function ProductsManager() {
+const styles = {
+  ProductsManager: {},
+  ClipLoader: { position: "fixed", top: "30%", left: "45%" },
+};
+
+function ProductsManager(props) {
   const isLoading = useSelector((state) => state.loadingReducers.isLoading);
 
   const currentPage = useSelector(
@@ -24,9 +29,9 @@ function ProductsManager() {
   const products = useSelector((state) => state.productsReducers.products);
 
   const Content = isLoading ? (
-    <div className={styles["ClipLoader"]}>
+    <Box sx={styles.ClipLoader}>
       <ClipLoaderComponent isLoading={isLoading} />
-    </div>
+    </Box>
   ) : (
     <Fragment>
       <Products products={products} showAddToCartBtn={true} isCart={false} />
@@ -39,11 +44,16 @@ function ProductsManager() {
     </Fragment>
   );
 
+  styles.ProductsManager = {
+    ...styles.ProductsManager,
+    ...(props.customStyle || {}),
+  };
+
   return (
-    <div className={styles["ProductsManager"]}>
+    <Box sx={styles.ProductsManager}>
       <ProductsHeader />
       {Content}
-    </div>
+    </Box>
   );
 }
 
