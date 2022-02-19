@@ -1,6 +1,6 @@
 import Pagination from "@mui/material/Pagination";
-import { useDispatch } from "react-redux";
-import { Box } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, PaginationItem } from "@mui/material";
 
 const styles = {
   PaginationComponent: { display: "flex", justifyContent: "center" },
@@ -8,6 +8,10 @@ const styles = {
 
 export default function PaginationComponent(props) {
   const dispatch = useDispatch();
+
+  const currentPage = useSelector(
+    (state) => state.paginationReducers.currentPage
+  );
 
   const handleChange = (event, value) => {
     dispatch(
@@ -32,6 +36,20 @@ export default function PaginationComponent(props) {
         count={props.totalPages}
         page={props.currentPage}
         onChange={handleChange}
+        renderItem={(item) => {
+          if (currentPage === item.page && item.type === "page") {
+            return (
+              <PaginationItem
+                {...item}
+                sx={{
+                  pointerEvents: "none",
+                }}
+              />
+            );
+          }
+
+          return <PaginationItem {...item} />;
+        }}
       />
     </Box>
   );
