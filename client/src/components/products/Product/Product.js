@@ -24,7 +24,7 @@ const charCount = 35;
 const styles = {
   Product: {},
   ProductCard: {
-    width: "16rem",
+    width: "20rem",
     margin: "1rem 0.2rem 0.5rem 0.2rem",
   },
 
