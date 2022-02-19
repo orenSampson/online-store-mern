@@ -9,14 +9,10 @@ import styles from "./ProductsHeader.module.scss";
 
 const sxStyles = {
   ProductsHeader: {
-    width: "100%",
     backgroundColor: "palegoldenrod",
-    margin: 0,
-    listStyle: "none",
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    padding: "0.5rem 0",
   },
 };
 
