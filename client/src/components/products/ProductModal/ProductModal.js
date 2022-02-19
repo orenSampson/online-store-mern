@@ -13,13 +13,25 @@ const ProductModal = (props) => {
       position: "fixed",
       zIndex: 200,
       top: "20%",
-      left: "25%",
-      width: "50%",
+      left: "30%",
+      width: "40%",
       display: props.show ? "block" : "none",
     },
 
     ProductModal_CardMedia: {
       height: "14rem",
+      objectFit: "contain",
+    },
+
+    cardContent: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    ProductTitle: {
+      textAlign: "center",
     },
   };
 
@@ -36,8 +48,8 @@ const ProductModal = (props) => {
         image={props.image}
         alt="image"
       />
-      <CardContent>
-        <Typography variant="h6" gutterBottom>
+      <CardContent sx={styles.cardContent}>
+        <Typography variant="h6" gutterBottom sx={styles.ProductTitle}>
           {props.title}
         </Typography>
 
