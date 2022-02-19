@@ -35,12 +35,14 @@ function ProductsManager(props) {
   ) : (
     <Fragment>
       <Products products={products} showAddToCartBtn={true} isCart={false} />
-      <PaginationComponent
-        currentPage={currentPage}
-        totalPages={totalPages}
-        category={category}
-        get_products={get_products}
-      />
+      {totalPages > 1 && (
+        <PaginationComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          category={category}
+          get_products={get_products}
+        />
+      )}
     </Fragment>
   );
 
