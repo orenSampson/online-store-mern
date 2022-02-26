@@ -50,11 +50,11 @@ function CartManager(props) {
   const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
 
   const sendTransactionHandler = () => {
-    dispatch(cartActions.cart_send_transaction());
+    dispatch(cartActions.cartSendTransaction());
   };
 
   const clearCartHandler = () => {
-    dispatch(cartActions.cart_clear_cart());
+    dispatch(cartActions.cartClearCart());
   };
 
   const discountAppliedRelatedElements = (

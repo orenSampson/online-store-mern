@@ -8,7 +8,7 @@ export function* addMessageHandler({ payload }) {
   const messageQueue = yield select(messageQueueState);
 
   yield put(
-    messageQueueActions.messagequeue_messagequeue_setter([
+    messageQueueActions.messagequeueMessagequeueSetter([
       payload,
       ...messageQueue,
     ])

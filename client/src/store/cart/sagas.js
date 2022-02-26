@@ -95,20 +95,18 @@ export function* addRemoveProductHandler({ payload }) {
       currentStateDiscounts,
     });
 
-    yield put(cartActions.cart_isDiscountApplied_setter(isDiscountApplied));
-    yield put(cartActions.cart_products_setter(currentStateCartProducts));
-    yield put(productsActions.products_prodcuts_setter(currentStateProducts));
+    yield put(cartActions.cartIsDiscountAppliedSetter(isDiscountApplied));
+    yield put(cartActions.cartProductsSetter(currentStateCartProducts));
+    yield put(productsActions.productsProdcutsSetter(currentStateProducts));
     yield put(
-      cartActions.cart_totalPrice_before_discount_setter(
-        totalPriceBeforeDiscount
-      )
+      cartActions.cartTotalPriceBeforeDiscountSetter(totalPriceBeforeDiscount)
     );
     yield put(
-      cartActions.cart_totalPrice_after_discount_setter(totalPriceAfterDiscount)
+      cartActions.cartTotalPriceAfterDiscountSetter(totalPriceAfterDiscount)
     );
   } catch (error) {
     yield put(
-      messageQueueActions.messagequeue_addMessage({
+      messageQueueActions.messagequeueAddMessage({
         type: "error",
         content: error.message,
       })
@@ -123,7 +121,7 @@ export function* sendTransactionHandler() {
 
   try {
     yield put(
-      loadingActions.loading_isloading_setter(!LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(!LOADING_INITIAL_STATE.isLoading)
     );
 
     const token = localStorage.getItem(TOKEN_NAME);
@@ -138,14 +136,14 @@ export function* sendTransactionHandler() {
 
     yield call(requestsendTransaction, payload, token);
 
-    yield put(cartActions.cart_send_transaction_success());
+    yield put(cartActions.cartSendTransactionSuccess());
   } catch (error) {
     const err =
       error.message ||
       error.response?.data?.message ||
       messages.API_CALL_FAILED;
 
-    yield put(cartActions.cart_send_transaction_failure(err));
+    yield put(cartActions.cartSendTransactionFailure(err));
   }
 }
 
@@ -160,11 +158,11 @@ export function* getDiscountsHandler() {
         percentage: discount.percentage,
       }));
 
-      yield put(cartActions.cart_discounts_setter(dicounts));
+      yield put(cartActions.cartDiscountsSetter(dicounts));
     }
   } catch (error) {
     yield put(
-      messageQueueActions.messagequeue_addMessage({
+      messageQueueActions.messagequeueAddMessage({
         type: "error",
         content: error.message,
       })
@@ -173,10 +171,10 @@ export function* getDiscountsHandler() {
 }
 
 export function* sendTransactionSuccessHandler() {
-  yield put(cartActions.cart_clear_cart());
+  yield put(cartActions.cartClearCart());
 
   yield put(
-    messageQueueActions.messagequeue_addMessage({
+    messageQueueActions.messagequeueAddMessage({
       type: "success",
       content: "Transaction sent successfully",
     })
@@ -185,11 +183,11 @@ export function* sendTransactionSuccessHandler() {
 
 export function* sendTransactionFailureHandler({ payload }) {
   yield put(
-    loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+    loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
   );
 
   yield put(
-    messageQueueActions.messagequeue_addMessage({
+    messageQueueActions.messagequeueAddMessage({
       type: "error",
       content: payload,
     })
@@ -199,31 +197,31 @@ export function* sendTransactionFailureHandler({ payload }) {
 export function* clearCartHandler() {
   try {
     yield put(
-      cartActions.cart_isDiscountApplied_setter(
+      cartActions.cartIsDiscountAppliedSetter(
         CART_INITIAL_STATE.isDiscountApplied
       )
     );
 
-    yield put(cartActions.cart_products_setter(CART_INITIAL_STATE.products));
+    yield put(cartActions.cartProductsSetter(CART_INITIAL_STATE.products));
 
     yield put(
-      cartActions.cart_totalPrice_before_discount_setter(
+      cartActions.cartTotalPriceBeforeDiscountSetter(
         CART_INITIAL_STATE.totalPriceBeforeDiscount
       )
     );
 
     yield put(
-      cartActions.cart_totalPrice_after_discount_setter(
+      cartActions.cartTotalPriceAfterDiscountSetter(
         CART_INITIAL_STATE.totalPriceAfterDiscount
       )
     );
 
     yield put(
-      loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
     );
   } catch (error) {
     yield put(
-      messageQueueActions.messagequeue_addMessage({
+      messageQueueActions.messagequeueAddMessage({
         type: "error",
         content: "error clearing cart",
       })

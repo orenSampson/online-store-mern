@@ -15,7 +15,7 @@ export function* getProductsHandler({ payload }) {
 
   try {
     yield put(
-      loadingActions.loading_isloading_setter(!LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(!LOADING_INITIAL_STATE.isLoading)
     );
 
     const { data } = yield call(requestGetProducts, payload);
@@ -50,21 +50,21 @@ export function* getProductsHandler({ payload }) {
       page: data.page,
     };
 
-    yield put(productsActions.get_prodcuts_success(payloadSuccess));
+    yield put(productsActions.getProdcutsSuccess(payloadSuccess));
   } catch (error) {
-    yield put(productsActions.get_prodcuts_failure(error.message));
+    yield put(productsActions.getProdcutsFailure(error.message));
   }
 }
 
 export function* getProductsSuccessHandler({ payload }) {
   yield put(
-    loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+    loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
   );
 
-  yield put(productsActions.products_prodcuts_setter(payload.productsArr));
+  yield put(productsActions.productsProdcutsSetter(payload.productsArr));
 
   yield put(
-    paginationActions.new_state_pagination({
+    paginationActions.newStatePagination({
       totalPages: payload.totalPages,
       page: payload.page,
     })
@@ -73,11 +73,11 @@ export function* getProductsSuccessHandler({ payload }) {
 
 export function* getProductsfailureHandler({ payload }) {
   yield put(
-    loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+    loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
   );
 
   yield put(
-    messageQueueActions.messagequeue_addMessage({
+    messageQueueActions.messagequeueAddMessage({
       type: "error",
       content: payload,
     })

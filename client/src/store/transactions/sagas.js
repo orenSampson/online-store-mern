@@ -11,7 +11,7 @@ import { TOKEN_NAME } from "../constants/auth";
 export function* getTransactionsHandler() {
   try {
     yield put(
-      loadingActions.loading_isloading_setter(!LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(!LOADING_INITIAL_STATE.isLoading)
     );
 
     const token = localStorage.getItem(TOKEN_NAME);
@@ -27,16 +27,16 @@ export function* getTransactionsHandler() {
     }
 
     yield put(
-      loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
     );
 
-    yield put(transactionsActions.transactions_transactions_setter(data));
+    yield put(transactionsActions.transactionsTransactionsSetter(data));
   } catch (error) {
     yield put(
-      loadingActions.loading_isloading_setter(LOADING_INITIAL_STATE.isLoading)
+      loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)
     );
 
-    messageQueueActions.messagequeue_addMessage({
+    messageQueueActions.messagequeueAddMessage({
       type: "error",
       content: error.message,
     });

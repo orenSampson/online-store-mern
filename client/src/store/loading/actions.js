@@ -1,6 +1,6 @@
 import * as types from "./types";
 
-export const loading_isloading_setter = (payload) => ({
+export const loadingIsloadingSetter = (payload) => ({
   type: types.LOADING_ISLOADING_SETTER,
   payload,
 });

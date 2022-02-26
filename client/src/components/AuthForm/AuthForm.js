@@ -61,7 +61,7 @@ function AuthForm(props) {
     event.preventDefault();
 
     dispatch(
-      authActions.auth_login_signup({
+      authActions.authLoginSignup({
         isLoginMode,
         email,
         password,

@@ -46,20 +46,18 @@ const Header = (props) => {
   );
 
   const switchShowSideBarHandler = () => {
-    dispatch(generalActions.general_showSideBar_setter(!showSideBar));
+    dispatch(generalActions.generalShowSideBarSetter(!showSideBar));
 
-    dispatch(generalActions.general_showBackDrop_setter(!showBackDrop));
+    dispatch(generalActions.generalShowBackDropSetter(!showBackDrop));
   };
 
   const closeShowSideBarHandler = () => {
     dispatch(
-      generalActions.general_showSideBar_setter(
-        GENERAL_INITIAL_STATE.showSideBar
-      )
+      generalActions.generalShowSideBarSetter(GENERAL_INITIAL_STATE.showSideBar)
     );
 
     dispatch(
-      generalActions.general_showBackDrop_setter(
+      generalActions.generalShowBackDropSetter(
         GENERAL_INITIAL_STATE.showBackDrop
       )
     );

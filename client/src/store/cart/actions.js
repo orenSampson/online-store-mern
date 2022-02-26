@@ -1,54 +1,54 @@
 import * as types from "./types";
 
-export const cart_discounts_setter = (payload) => ({
+export const cartDiscountsSetter = (payload) => ({
   type: types.CART_DISCOUNTS_SETTER,
   discounts: payload,
 });
 
-export const cart_isDiscountApplied_setter = (payload) => {
+export const cartIsDiscountAppliedSetter = (payload) => {
   return {
     type: types.CART_ISDISCOUNTAPPLIED_SETTER,
     isDiscountApplied: payload,
   };
 };
 
-export const cart_products_setter = (payload) => ({
+export const cartProductsSetter = (payload) => ({
   type: types.CART_PRODUCTS_SETTER,
   cartProducts: payload,
 });
 
-export const cart_totalPrice_before_discount_setter = (payload) => ({
+export const cartTotalPriceBeforeDiscountSetter = (payload) => ({
   type: types.CART_TOTALPRICE_BEFORE_DISCOUNT_SETTER,
   totalPriceBeforeDiscount: payload,
 });
 
-export const cart_totalPrice_after_discount_setter = (payload) => ({
+export const cartTotalPriceAfterDiscountSetter = (payload) => ({
   type: types.CART_TOTALPRICE_AFTER_DISCOUNT_SETTER,
   totalPriceAfterDiscount: payload,
 });
 
-export const cart_add_remove_product = (payload) => ({
+export const cartAddRemoveProduct = (payload) => ({
   type: types.CART_ADD_REMOVE_PRODUCT,
   payload,
 });
 
-export const cart_send_transaction = () => ({
+export const cartSendTransaction = () => ({
   type: types.CART_SEND_TRANSACTION,
 });
 
-export const cart_get_discounts = () => ({
+export const cartGetDiscounts = () => ({
   type: types.CART_GET_DISCOUNTS,
 });
 
-export const cart_send_transaction_success = () => ({
+export const cartSendTransactionSuccess = () => ({
   type: types.CART_SEND_TRANSACTION_SUCCESS,
 });
 
-export const cart_send_transaction_failure = (payload) => ({
+export const cartSendTransactionFailure = (payload) => ({
   type: types.CART_SEND_TRANSACTION_FAILURE,
   payload,
 });
 
-export const cart_clear_cart = () => ({
+export const cartClearCart = () => ({
   type: types.CART_CLEAR_CART,
 });

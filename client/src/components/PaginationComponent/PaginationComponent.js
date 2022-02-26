@@ -15,7 +15,13 @@ export default function PaginationComponent(props) {
 
   const handleChange = (event, value) => {
     dispatch(
-      props.get_products({
+      props.getProducts({
+        category: props.category,
+        page: value,
+      })
+    );
+    dispatch(
+      props.getProducts({
         category: props.category,
         page: value,
       })

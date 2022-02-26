@@ -28,7 +28,7 @@ const PasswordTextField = (props) => {
     return () => {
       clearTimeoutAndPasswordError();
 
-      dispatch(authActions.auth_password_reset());
+      dispatch(authActions.authPasswordReset());
     };
   }, [dispatch]);
 
@@ -37,17 +37,17 @@ const PasswordTextField = (props) => {
       passwordInputRef.current.value.length ===
       AUTH_INITIAL_STATE.password.length
     ) {
-      dispatch(authActions.auth_passwordError_setter(messages.FIELD_IS_EMPTY));
+      dispatch(authActions.authPasswordErrorSetter(messages.FIELD_IS_EMPTY));
     } else {
       if (
         passwordInputRef.current.value.length <
         loginSignupConsts.PASSWORD_MIN_LENGTH
       ) {
         dispatch(
-          authActions.auth_passwordError_setter(messages.PASSWORD_NOT_VALID)
+          authActions.authPasswordErrorSetter(messages.PASSWORD_NOT_VALID)
         );
       } else {
-        dispatch(authActions.auth_passwordError_setter(messages.FIELD_IS_OK));
+        dispatch(authActions.authPasswordErrorSetter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -56,11 +56,11 @@ const PasswordTextField = (props) => {
     clearTimeout(passwordTimeoutID);
     passwordTimeoutID = null;
 
-    dispatch(authActions.auth_passwordError_reset());
+    dispatch(authActions.authPasswordErrorReset());
   };
 
   const checkOnChangeHandler = () => {
-    dispatch(authActions.auth_password_setter(passwordInputRef.current.value));
+    dispatch(authActions.authPasswordSetter(passwordInputRef.current.value));
 
     clearTimeoutAndPasswordError();
 

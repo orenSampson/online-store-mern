@@ -27,7 +27,7 @@ function TransactionsManager(props) {
 
   useEffect(() => {
     if (isLoggedin) {
-      dispatch(transactionsActions.transactions_get_transactions());
+      dispatch(transactionsActions.transactionsGetTransactions());
     }
   }, [dispatch, isLoggedin]);
 

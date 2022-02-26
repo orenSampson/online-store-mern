@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 import ProductsManager from "../../components/products/ProductsManager/ProductsManager";
 import {
-  products_category_setter,
-  get_products,
+  productsCategorySetter,
+  getProducts,
 } from "../../store/products/actions";
 
 const CategoryProductsViewer = () => {
@@ -14,8 +14,8 @@ const CategoryProductsViewer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(get_products({ category: category, page: 1 }));
-    dispatch(products_category_setter(category));
+    dispatch(getProducts({ category: category, page: 1 }));
+    dispatch(productsCategorySetter(category));
   }, [dispatch, category]);
 
   return (

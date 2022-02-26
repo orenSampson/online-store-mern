@@ -22,7 +22,7 @@ const MessageDisplayer = () => {
     const message = messageQueueCopy.pop();
 
     dispatch(
-      messageQueueActions.messagequeue_messagequeue_setter(messageQueueCopy)
+      messageQueueActions.messagequeueMessagequeueSetter(messageQueueCopy)
     );
 
     if (message.type === "success") {

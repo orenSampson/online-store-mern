@@ -12,7 +12,7 @@ function MainNav() {
   const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
 
   const logoutHandler = () => {
-    dispatch(authActions.auth_logout());
+    dispatch(authActions.authLogout());
   };
 
   return (

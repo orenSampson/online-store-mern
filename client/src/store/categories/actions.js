@@ -1,25 +1,25 @@
 import * as types from "./types";
 
-export const categories_categories_setter = (payload) => ({
+export const categoriesCategoriesSetter = (payload) => ({
   type: types.CATEGORIES_CATEGORIES_SETTER,
   payload,
 });
 
-export const categories_isloading_setter = (payload) => ({
+export const categoriesIsloadingSetter = (payload) => ({
   type: types.CATEGORIES_ISLOADING_SETTER,
   payload,
 });
 
-export const get_categories = () => ({
+export const getCategories = () => ({
   type: types.CATEGORIES_GET,
 });
 
-export const get_categories_success = (payload) => ({
+export const getCategoriesSuccess = (payload) => ({
   type: types.CATEGORIES_GET_SUCCESS,
   payload,
 });
 
-export const get_categories_failure = (payload) => ({
+export const getCategoriesFailure = (payload) => ({
   type: types.CATEGORIES_GET_FAILURE,
   payload,
 });

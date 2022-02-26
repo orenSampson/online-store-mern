@@ -11,12 +11,11 @@ function SideBar() {
 
   const closeShowSideBarHandler = () => {
     dispatch(
-      generalActions.general_showSideBar_setter(
-        GENERAL_INITIAL_STATE.showSideBar
-      )
+      generalActions.generalShowSideBarSetter(GENERAL_INITIAL_STATE.showSideBar)
     );
+
     dispatch(
-      generalActions.general_showBackDrop_setter(
+      generalActions.generalShowBackDropSetter(
         GENERAL_INITIAL_STATE.showBackDrop
       )
     );

@@ -65,7 +65,7 @@ const Product = (props) => {
 
   const addTocartHandler = () => {
     dispatch(
-      cartActions.cart_add_remove_product({
+      cartActions.cartAddRemoveProduct({
         id: props.id,
         title: props.title,
         description: props.description,

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 
 import ProductsManager from "../../components/products/ProductsManager/ProductsManager";
 import {
-  products_category_setter,
-  get_products,
+  productsCategorySetter,
+  getProducts,
 } from "../../store/products/actions";
 import { ALL_PRODUCTS } from "../../constants/products";
 
@@ -12,8 +12,8 @@ function AllProductsViewer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(get_products({ category: ALL_PRODUCTS, page: 1 }));
-    dispatch(products_category_setter(ALL_PRODUCTS));
+    dispatch(getProducts({ category: ALL_PRODUCTS, page: 1 }));
+    dispatch(productsCategorySetter(ALL_PRODUCTS));
   }, [dispatch]);
 
   return (

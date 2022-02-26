@@ -1,6 +1,6 @@
 import * as types from "./types";
 
-export const new_state_pagination = (payload) => {
+export const newStatePagination = (payload) => {
   return {
     type: types.PAGINATION_NEW_STATE,
     payload: {
@@ -10,7 +10,7 @@ export const new_state_pagination = (payload) => {
   };
 };
 
-export const reset_state_pagination = () => {
+export const resetStatePagination = () => {
   return {
     type: types.PAGINATION_RESET_STATE,
   };

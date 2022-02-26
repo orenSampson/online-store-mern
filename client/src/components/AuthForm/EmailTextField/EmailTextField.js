@@ -26,18 +26,18 @@ const EmailTextField = (props) => {
     return () => {
       clearTimeoutAndEmailError();
 
-      dispatch(authActions.auth_email_reset());
+      dispatch(authActions.authEmailReset());
     };
   }, [dispatch]);
 
   const emailValidator = () => {
     if (emailInputRef.current.value === AUTH_INITIAL_STATE.email) {
-      dispatch(authActions.auth_emailError_setter(messages.FIELD_IS_EMPTY));
+      dispatch(authActions.authEmailErrorSetter(messages.FIELD_IS_EMPTY));
     } else {
       if (!validator.isEmail(emailInputRef.current.value)) {
-        dispatch(authActions.auth_emailError_setter(messages.EMAIL_NOT_VALID));
+        dispatch(authActions.authEmailErrorSetter(messages.EMAIL_NOT_VALID));
       } else {
-        dispatch(authActions.auth_emailError_setter(messages.FIELD_IS_OK));
+        dispatch(authActions.authEmailErrorSetter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -46,11 +46,11 @@ const EmailTextField = (props) => {
     clearTimeout(emailTimeoutID);
     emailTimeoutID = null;
 
-    dispatch(authActions.auth_emailError_reset());
+    dispatch(authActions.authEmailErrorReset());
   };
 
   const checkOnChangeHandler = () => {
-    dispatch(authActions.auth_email_setter(emailInputRef.current.value));
+    dispatch(authActions.authEmailSetter(emailInputRef.current.value));
 
     clearTimeoutAndEmailError();
 

@@ -6,7 +6,7 @@ import Products from "../Products/Products";
 import PaginationComponent from "../../PaginationComponent/PaginationComponent";
 import ProductsHeader from "../ProductsHeader/ProductsHeader";
 import ClipLoaderComponent from "../../general/ClipLoaderComponent/ClipLoaderComponent";
-import { get_products } from "../../../store/products/actions";
+import { getProducts } from "../../../store/products/actions";
 
 const styles = {
   ProductsManager: {},
@@ -40,7 +40,7 @@ function ProductsManager(props) {
           currentPage={currentPage}
           totalPages={totalPages}
           category={category}
-          get_products={get_products}
+          getProducts={getProducts}
         />
       )}
     </Fragment>

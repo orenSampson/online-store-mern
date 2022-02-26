@@ -9,7 +9,7 @@ import * as messages from "../constants/messages";
 export function* getCategoriesHandler() {
   try {
     yield put(
-      categoriesActions.categories_isloading_setter(
+      categoriesActions.categoriesIsloadingSetter(
         !CATEGORIES_INITIAL_STATE.isLoading
       )
     );
@@ -24,35 +24,35 @@ export function* getCategoriesHandler() {
       return category.category;
     });
 
-    yield put(categoriesActions.get_categories_success(data));
+    yield put(categoriesActions.getCategoriesSuccess(data));
   } catch (error) {
     const err =
       error.message ||
       error.response?.data?.message ||
       messages.API_CALL_FAILED;
-    yield put(categoriesActions.get_categories_failure(err));
+    yield put(categoriesActions.getCategoriesFailure(err));
   }
 }
 
 export function* getCategoriesSuccessHandler({ payload }) {
   yield put(
-    categoriesActions.categories_isloading_setter(
+    categoriesActions.categoriesIsloadingSetter(
       CATEGORIES_INITIAL_STATE.isLoading
     )
   );
 
-  yield put(categoriesActions.categories_categories_setter(payload));
+  yield put(categoriesActions.categoriesCategoriesSetter(payload));
 }
 
 export function* getCategoriesfailureHandler({ payload }) {
   yield put(
-    categoriesActions.categories_isloading_setter(
+    categoriesActions.categoriesIsloadingSetter(
       CATEGORIES_INITIAL_STATE.isLoading
     )
   );
 
   yield put(
-    messageQueueActions.messagequeue_addMessage({
+    messageQueueActions.messagequeueAddMessage({
       type: "error",
       content: payload,
     })
