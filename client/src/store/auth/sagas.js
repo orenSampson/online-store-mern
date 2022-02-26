@@ -1,7 +1,13 @@
 import { call, put } from "redux-saga/effects";
 import { push } from "connected-react-router";
 
-import * as authActions from "./actions";
+import {
+  loginSuccess,
+  signupSuccess,
+  failure,
+  isLoggedinSetter,
+  loggedUserEmailSetter,
+} from "./actions";
 import * as loadingActions from "../loading/actions";
 import * as messageQueueActions from "../messageQueue/actions";
 import * as cartActions from "../cart/actions";
@@ -20,12 +26,12 @@ export function* authLoginSignupHandler({ payload }) {
     const authObj = yield call(requestAuth, payload);
 
     if (payload.isLoginMode) {
-      yield put(authActions.authLoginSuccess(authObj));
+      yield put(loginSuccess(authObj));
     } else {
-      yield put(authActions.authSignupSuccess());
+      yield put(signupSuccess());
     }
   } catch (error) {
-    yield put(authActions.authFailure(error.message));
+    yield put(failure(error.message));
   }
 }
 
@@ -33,10 +39,8 @@ export function* authLogoutHandler() {
   yield localStorage.removeItem(TOKEN_NAME);
   yield localStorage.removeItem(LOGGED_USER_EMAIL);
 
-  yield put(
-    authActions.authLoggedUserEmailSetter(AUTH_INITIAL_STATE.loggedUserEmail)
-  );
-  yield put(authActions.authIsLoggedinSetter(AUTH_INITIAL_STATE.isLoggedin));
+  yield put(loggedUserEmailSetter(AUTH_INITIAL_STATE.loggedUserEmail));
+  yield put(isLoggedinSetter(AUTH_INITIAL_STATE.isLoggedin));
 
   yield put(cartActions.cartClearCart());
 
@@ -55,9 +59,7 @@ export function* checkIfLoggedIn() {
   const loggedInUserEmail = yield localStorage.getItem(LOGGED_USER_EMAIL);
 
   if (token && loggedInUserEmail) {
-    yield put(
-      authActions.authLoginSuccess({ token, email: loggedInUserEmail })
-    );
+    yield put(loginSuccess({ token, email: loggedInUserEmail }));
   }
 }
 
@@ -65,8 +67,8 @@ export function* authLoginSuccessHandler(payload) {
   localStorage.setItem(TOKEN_NAME, payload.payload.token);
   localStorage.setItem(LOGGED_USER_EMAIL, payload.payload.email);
 
-  yield put(authActions.authLoggedUserEmailSetter(payload.payload.email));
-  yield put(authActions.authIsLoggedinSetter(!AUTH_INITIAL_STATE.isLoggedin));
+  yield put(loggedUserEmailSetter(payload.payload.email));
+  yield put(isLoggedinSetter(!AUTH_INITIAL_STATE.isLoggedin));
 
   yield put(
     loadingActions.loadingIsloadingSetter(LOADING_INITIAL_STATE.isLoading)

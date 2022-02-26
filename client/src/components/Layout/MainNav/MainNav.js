@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-import * as authActions from "../../../store/auth/actions";
+import { logout } from "../../../store/auth/actions";
 import styles from "./MainNav.module.scss";
 
 function MainNav() {
@@ -12,7 +12,7 @@ function MainNav() {
   const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
 
   const logoutHandler = () => {
-    dispatch(authActions.authLogout());
+    dispatch(logout());
   };
 
   return (

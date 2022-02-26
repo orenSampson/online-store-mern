@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@mui/material";
 
 import * as messages from "../../../constants/messages";
-import * as authActions from "../../../store/auth/actions";
+import {
+  passwordSetter,
+  passwordReset,
+  passwordErrorSetter,
+  passwordErrorReset,
+} from "../../../store/auth/actions";
 import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 import * as loginSignupConsts from "../../../constants/loginSignup";
 
@@ -28,7 +33,7 @@ const PasswordTextField = (props) => {
     return () => {
       clearTimeoutAndPasswordError();
 
-      dispatch(authActions.authPasswordReset());
+      dispatch(passwordReset());
     };
   }, [dispatch]);
 
@@ -37,17 +42,15 @@ const PasswordTextField = (props) => {
       passwordInputRef.current.value.length ===
       AUTH_INITIAL_STATE.password.length
     ) {
-      dispatch(authActions.authPasswordErrorSetter(messages.FIELD_IS_EMPTY));
+      dispatch(passwordErrorSetter(messages.FIELD_IS_EMPTY));
     } else {
       if (
         passwordInputRef.current.value.length <
         loginSignupConsts.PASSWORD_MIN_LENGTH
       ) {
-        dispatch(
-          authActions.authPasswordErrorSetter(messages.PASSWORD_NOT_VALID)
-        );
+        dispatch(passwordErrorSetter(messages.PASSWORD_NOT_VALID));
       } else {
-        dispatch(authActions.authPasswordErrorSetter(messages.FIELD_IS_OK));
+        dispatch(passwordErrorSetter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -56,11 +59,11 @@ const PasswordTextField = (props) => {
     clearTimeout(passwordTimeoutID);
     passwordTimeoutID = null;
 
-    dispatch(authActions.authPasswordErrorReset());
+    dispatch(passwordErrorReset());
   };
 
   const checkOnChangeHandler = () => {
-    dispatch(authActions.authPasswordSetter(passwordInputRef.current.value));
+    dispatch(passwordSetter(passwordInputRef.current.value));
 
     clearTimeoutAndPasswordError();
 
