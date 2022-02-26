@@ -2,25 +2,17 @@ import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OutsideClickHandler from "react-outside-click-handler";
-import {
-  Backdrop,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-} from "@mui/material";
+import { Backdrop, AppBar, Toolbar, Typography, Box } from "@mui/material";
 
 import SideBar from "../SideBar/SideBar";
 import MainNav from "../MainNav/MainNav";
 import * as generalActions from "../../../store/general/actions";
-import * as authActions from "../../../store/auth/actions";
 import { GENERAL_INITIAL_STATE } from "../../../store/general/reducers";
 import { IoStorefrontOutline } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "./Header.module.scss";
 
-const sxStyles = (props) => ({
+const sxStyles = {
   Header: {},
   mainHeader: {
     display: "flex",
@@ -35,12 +27,8 @@ const sxStyles = (props) => ({
   loginStatusbar: {
     marginLeft: "0.7rem",
   },
-  logout: {
-    display: props.isLoggedin ? "inline" : "none",
-    marginLeft: "1rem",
-  },
   Backdrop: { color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 },
-});
+};
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -57,12 +45,9 @@ const Header = (props) => {
     (state) => state.authReducers.loggedUserEmail
   );
 
-  const logoutHandler = () => {
-    dispatch(authActions.auth_logout());
-  };
-
   const switchShowSideBarHandler = () => {
     dispatch(generalActions.general_showSideBar_setter(!showSideBar));
+
     dispatch(generalActions.general_showBackDrop_setter(!showBackDrop));
   };
 
@@ -72,6 +57,7 @@ const Header = (props) => {
         GENERAL_INITIAL_STATE.showSideBar
       )
     );
+
     dispatch(
       generalActions.general_showBackDrop_setter(
         GENERAL_INITIAL_STATE.showBackDrop
@@ -79,16 +65,16 @@ const Header = (props) => {
     );
   };
 
-  sxStyles({ isLoggedin }).Header = {
+  sxStyles.Header = {
     ...styles.Header,
     ...(props.customStyle || {}),
   };
 
   return (
-    <Box sx={sxStyles({ isLoggedin }).Header}>
+    <Box sx={sxStyles.Header}>
       <AppBar elevation={0} position="static">
-        <Toolbar sx={sxStyles({ isLoggedin }).mainHeader}>
-          <Box sx={sxStyles({ isLoggedin }).leftIcons}>
+        <Toolbar sx={sxStyles.mainHeader}>
+          <Box sx={sxStyles.leftIcons}>
             <Box component="span">
               <GiHamburgerMenu
                 className={styles["main-header__burger"]}
@@ -102,19 +88,9 @@ const Header = (props) => {
                   size={40}
                 />
               </NavLink>
-
-              <Button
-                sx={sxStyles({ isLoggedin }).logout}
-                variant="contained"
-                color="warning"
-                disableElevation
-                onClick={logoutHandler}
-              >
-                Logout
-              </Button>
             </Box>
 
-            <Box component="span" sx={sxStyles({ isLoggedin }).loginStatusbar}>
+            <Box component="span" sx={sxStyles.loginStatusbar}>
               <Typography display="inline">
                 {isLoggedin ? `logged in as: ${loggedInEmail}` : "logged out"}
               </Typography>
@@ -126,7 +102,7 @@ const Header = (props) => {
       </AppBar>
 
       <Fragment>
-        <Backdrop sx={sxStyles({ isLoggedin }).Backdrop} open={showBackDrop}>
+        <Backdrop sx={sxStyles.Backdrop} open={showBackDrop}>
           <OutsideClickHandler onOutsideClick={closeShowSideBarHandler}>
             <SideBar />
           </OutsideClickHandler>

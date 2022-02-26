@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -7,6 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { startup } from "./store/startup/actions";
 import Layout from "./components/Layout/Layout";
 import { history } from "./store/index";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const AllProductsPage = React.lazy(() =>
   import("./pages/AllProductsPage/AllProductsPage")
@@ -28,6 +29,8 @@ const TransactionsPage = React.lazy(() =>
 const App = () => {
   const dispatch = useDispatch();
 
+  const isLoggedin = useSelector((state) => state.authReducers.isLoggedin);
+
   useEffect(() => {
     dispatch(startup());
   }, [dispatch]);
@@ -45,9 +48,11 @@ const App = () => {
                 <Route path="/categories/:category">
                   <CategoryProductsPage />
                 </Route>
-                <Route path="/auth">
-                  <AuthPage />
-                </Route>
+                <ProtectedRoute
+                  path="/auth"
+                  isAllowed={!isLoggedin}
+                  Component={AuthPage}
+                />
                 <Route path="/cart">
                   <CartPage />
                 </Route>
