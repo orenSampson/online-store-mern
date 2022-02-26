@@ -12,7 +12,7 @@ import {
 import EmailTextField from "./EmailTextField/EmailTextField";
 import PasswordTextField from "./PasswordTextField/PasswordTextField";
 import * as messages from "../../constants/messages";
-import { authLoginSignup } from "../../store/auth/actions";
+import * as authActions from "../../store/auth/actions";
 
 const styles = {
   AuthForm: {
@@ -61,7 +61,7 @@ function AuthForm(props) {
     event.preventDefault();
 
     dispatch(
-      authLoginSignup({
+      authActions.authLoginSignup({
         isLoginMode,
         email,
         password,
