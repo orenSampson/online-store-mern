@@ -4,10 +4,10 @@ import { TextField } from "@mui/material";
 
 import * as messages from "../../../constants/messages";
 import {
-  passwordSetter,
-  passwordReset,
-  passwordErrorSetter,
-  passwordErrorReset,
+  authPasswordSetter,
+  authPasswordReset,
+  authPasswordErrorSetter,
+  authPasswordErrorReset,
 } from "../../../store/auth/actions";
 import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 import * as loginSignupConsts from "../../../constants/loginSignup";
@@ -33,7 +33,7 @@ const PasswordTextField = (props) => {
     return () => {
       clearTimeoutAndPasswordError();
 
-      dispatch(passwordReset());
+      dispatch(authPasswordReset());
     };
   }, [dispatch]);
 
@@ -42,15 +42,15 @@ const PasswordTextField = (props) => {
       passwordInputRef.current.value.length ===
       AUTH_INITIAL_STATE.password.length
     ) {
-      dispatch(passwordErrorSetter(messages.FIELD_IS_EMPTY));
+      dispatch(authPasswordErrorSetter(messages.FIELD_IS_EMPTY));
     } else {
       if (
         passwordInputRef.current.value.length <
         loginSignupConsts.PASSWORD_MIN_LENGTH
       ) {
-        dispatch(passwordErrorSetter(messages.PASSWORD_NOT_VALID));
+        dispatch(authPasswordErrorSetter(messages.PASSWORD_NOT_VALID));
       } else {
-        dispatch(passwordErrorSetter(messages.FIELD_IS_OK));
+        dispatch(authPasswordErrorSetter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -59,11 +59,11 @@ const PasswordTextField = (props) => {
     clearTimeout(passwordTimeoutID);
     passwordTimeoutID = null;
 
-    dispatch(passwordErrorReset());
+    dispatch(authPasswordErrorReset());
   };
 
   const checkOnChangeHandler = () => {
-    dispatch(passwordSetter(passwordInputRef.current.value));
+    dispatch(authPasswordSetter(passwordInputRef.current.value));
 
     clearTimeoutAndPasswordError();
 

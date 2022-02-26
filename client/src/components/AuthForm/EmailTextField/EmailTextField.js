@@ -5,10 +5,10 @@ import validator from "validator";
 
 import * as messages from "../../../constants/messages";
 import {
-  emailSetter,
-  emailReset,
-  emailErrorSetter,
-  emailErrorReset,
+  authEmailSetter,
+  authEmailReset,
+  authEmailErrorSetter,
+  authEmailErrorReset,
 } from "../../../store/auth/actions";
 import { AUTH_INITIAL_STATE } from "../../../store/auth/reducers";
 
@@ -31,18 +31,18 @@ const EmailTextField = (props) => {
     return () => {
       clearTimeoutAndEmailError();
 
-      dispatch(emailReset());
+      dispatch(authEmailReset());
     };
   }, [dispatch]);
 
   const emailValidator = () => {
     if (emailInputRef.current.value === AUTH_INITIAL_STATE.email) {
-      dispatch(emailErrorSetter(messages.FIELD_IS_EMPTY));
+      dispatch(authEmailErrorSetter(messages.FIELD_IS_EMPTY));
     } else {
       if (!validator.isEmail(emailInputRef.current.value)) {
-        dispatch(emailErrorSetter(messages.EMAIL_NOT_VALID));
+        dispatch(authEmailErrorSetter(messages.EMAIL_NOT_VALID));
       } else {
-        dispatch(emailErrorSetter(messages.FIELD_IS_OK));
+        dispatch(authEmailErrorSetter(messages.FIELD_IS_OK));
       }
     }
   };
@@ -51,11 +51,11 @@ const EmailTextField = (props) => {
     clearTimeout(emailTimeoutID);
     emailTimeoutID = null;
 
-    dispatch(emailErrorReset());
+    dispatch(authEmailErrorReset());
   };
 
   const checkOnChangeHandler = () => {
-    dispatch(emailSetter(emailInputRef.current.value));
+    dispatch(authEmailSetter(emailInputRef.current.value));
 
     clearTimeoutAndEmailError();
 
